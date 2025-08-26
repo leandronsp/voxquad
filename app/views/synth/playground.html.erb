@@ -46,37 +46,104 @@
     <span id="volumeValue">30</span>%
   </div>
   
-  <!-- SATB Section (VoxQuad) -->
+  <!-- SATB Section (VoxQuad - 4 Measures) -->
   <div style="margin: 20px 0; padding: 20px; background: #f3e5f5; border-radius: 8px;">
-    <h2>🎵 VoxQuad SATB (4 Voices)</h2>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-      <!-- Soprano -->
-      <div>
-        <label><strong>Soprano (S):</strong></label>
-        <select id="soprano" style="padding: 8px; font-size: 16px; width: 100%;"></select>
+    <h2>🎵 VoxQuad SATB (4 Measures)</h2>
+    
+    <!-- Measure 1 -->
+    <div style="margin: 15px 0; padding: 15px; background: rgba(255,255,255,0.3); border-radius: 6px;">
+      <h3 style="margin: 0 0 10px 0;">📊 Measure 1</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px;">
+        <div>
+          <label><strong>S:</strong></label>
+          <select id="m1_soprano" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
+        <div>
+          <label><strong>A:</strong></label>
+          <select id="m1_alto" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
+        <div>
+          <label><strong>T:</strong></label>
+          <select id="m1_tenor" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
+        <div>
+          <label><strong>B:</strong></label>
+          <select id="m1_bass" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
       </div>
-      
-      <!-- Alto -->
-      <div>
-        <label><strong>Alto (A):</strong></label>
-        <select id="alto" style="padding: 8px; font-size: 16px; width: 100%;"></select>
+    </div>
+    
+    <!-- Measure 2 -->
+    <div style="margin: 15px 0; padding: 15px; background: rgba(255,255,255,0.3); border-radius: 6px;">
+      <h3 style="margin: 0 0 10px 0;">📊 Measure 2</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px;">
+        <div>
+          <label><strong>S:</strong></label>
+          <select id="m2_soprano" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
+        <div>
+          <label><strong>A:</strong></label>
+          <select id="m2_alto" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
+        <div>
+          <label><strong>T:</strong></label>
+          <select id="m2_tenor" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
+        <div>
+          <label><strong>B:</strong></label>
+          <select id="m2_bass" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
       </div>
-      
-      <!-- Tenor -->
-      <div>
-        <label><strong>Tenor (T):</strong></label>
-        <select id="tenor" style="padding: 8px; font-size: 16px; width: 100%;"></select>
+    </div>
+    
+    <!-- Measure 3 -->
+    <div style="margin: 15px 0; padding: 15px; background: rgba(255,255,255,0.3); border-radius: 6px;">
+      <h3 style="margin: 0 0 10px 0;">📊 Measure 3</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px;">
+        <div>
+          <label><strong>S:</strong></label>
+          <select id="m3_soprano" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
+        <div>
+          <label><strong>A:</strong></label>
+          <select id="m3_alto" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
+        <div>
+          <label><strong>T:</strong></label>
+          <select id="m3_tenor" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
+        <div>
+          <label><strong>B:</strong></label>
+          <select id="m3_bass" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
       </div>
-      
-      <!-- Bass -->
-      <div>
-        <label><strong>Bass (B):</strong></label>
-        <select id="bass" style="padding: 8px; font-size: 16px; width: 100%;"></select>
+    </div>
+    
+    <!-- Measure 4 -->
+    <div style="margin: 15px 0; padding: 15px; background: rgba(255,255,255,0.3); border-radius: 6px;">
+      <h3 style="margin: 0 0 10px 0;">📊 Measure 4</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px;">
+        <div>
+          <label><strong>S:</strong></label>
+          <select id="m4_soprano" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
+        <div>
+          <label><strong>A:</strong></label>
+          <select id="m4_alto" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
+        <div>
+          <label><strong>T:</strong></label>
+          <select id="m4_tenor" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
+        <div>
+          <label><strong>B:</strong></label>
+          <select id="m4_bass" style="padding: 6px; font-size: 14px; width: 100%;"></select>
+        </div>
       </div>
     </div>
     
     <button id="playSATB" style="padding: 20px 40px; font-size: 24px; cursor: pointer; background: #9C27B0; color: white; border: none; border-radius: 8px;">
-      Play SATB
+      Play 4 Measures
     </button>
   </div>
 
@@ -154,11 +221,30 @@ document.addEventListener('DOMContentLoaded', () => {
   populateDropdown('chord2', '329.63');     // E4
   populateDropdown('chord3', '392.00');     // G4
   
-  // Populate SATB dropdowns with appropriate ranges
-  populateDropdown('soprano', '523.25');    // C5 (high range)
-  populateDropdown('alto', '392.00');       // G4 (mid-high range)
-  populateDropdown('tenor', '261.63');      // C4 (mid range)
-  populateDropdown('bass', '130.81');       // C3 (low range)
+  // Populate SATB measure dropdowns with appropriate ranges
+  // Measure 1 - C Major Chord
+  populateDropdown('m1_soprano', '523.25');  // C5
+  populateDropdown('m1_alto', '392.00');     // G4  
+  populateDropdown('m1_tenor', '329.63');    // E4
+  populateDropdown('m1_bass', '261.63');     // C4
+  
+  // Measure 2 - F Major Chord  
+  populateDropdown('m2_soprano', '698.46');  // F5
+  populateDropdown('m2_alto', '440.00');     // A4
+  populateDropdown('m2_tenor', '349.23');    // F4
+  populateDropdown('m2_bass', '174.61');     // F3
+  
+  // Measure 3 - A minor Chord
+  populateDropdown('m3_soprano', '659.25');  // E5
+  populateDropdown('m3_alto', '440.00');     // A4
+  populateDropdown('m3_tenor', '329.63');    // E4
+  populateDropdown('m3_bass', '220.00');     // A3
+  
+  // Measure 4 - G Major Chord
+  populateDropdown('m4_soprano', '783.99');  // G5
+  populateDropdown('m4_alto', '493.88');     // B4
+  populateDropdown('m4_tenor', '392.00');    // G4
+  populateDropdown('m4_bass', '196.00');     // G3
 });
 
 // Initialize on first user interaction
@@ -188,34 +274,14 @@ document.getElementById('playChord').addEventListener('click', () => {
     '⏱️ Duration: 1.0 seconds';
 });
 
-// Add SATB playback
+// Add 4-Measure SATB playback
 document.getElementById('playSATB').addEventListener('click', () => {
   if (!audioContext) {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
     document.getElementById('status').textContent = '✅ Audio context initialized!';
   }
   
-  // Get frequencies from all four SATB voices
-  const sopranoFreq = parseFloat(document.getElementById('soprano').value);
-  const altoFreq = parseFloat(document.getElementById('alto').value);
-  const tenorFreq = parseFloat(document.getElementById('tenor').value);
-  const bassFreq = parseFloat(document.getElementById('bass').value);
-  
-  const sopranoNote = document.getElementById('soprano').options[document.getElementById('soprano').selectedIndex].text;
-  const altoNote = document.getElementById('alto').options[document.getElementById('alto').selectedIndex].text;
-  const tenorNote = document.getElementById('tenor').options[document.getElementById('tenor').selectedIndex].text;
-  const bassNote = document.getElementById('bass').options[document.getElementById('bass').selectedIndex].text;
-  
-  playSATB([sopranoFreq, altoFreq, tenorFreq, bassFreq], 1.5); // Play for 1.5 seconds
-  
-  // Update status
-  document.getElementById('status').innerHTML = 
-    `🎵 Playing SATB Harmony<br>` +
-    `🎼 S: ${sopranoNote} (${sopranoFreq} Hz)<br>` +
-    `🎼 A: ${altoNote} (${altoFreq} Hz)<br>` +
-    `🎼 T: ${tenorNote} (${tenorFreq} Hz)<br>` +
-    `🎼 B: ${bassNote} (${bassFreq} Hz)<br>` +
-    '🎛️ 4-Voice Harmony • Duration: 1.5 seconds';
+  play4MeasureSATB();
 });
 
 document.getElementById('playNote').addEventListener('click', () => {
@@ -336,7 +402,7 @@ function playChord(frequencies, duration) {
   }, duration * 1000);
 }
 
-function playSATB(frequencies, duration) {
+function playSATB(frequencies, duration, startTime = 0) {
   // Array to store all oscillators for SATB
   const oscillators = [];
   const gainNodes = [];
@@ -373,24 +439,75 @@ function playSATB(frequencies, duration) {
     gainNodes.push(gainNode);
   });
   
-  // Apply ADSR envelope to master gain (longer for SATB harmony)
-  const now = audioContext.currentTime;
+  // Apply ADSR envelope to master gain
+  const now = audioContext.currentTime + startTime;
   masterGain.gain.setValueAtTime(0, now);                           // Start at 0
-  masterGain.gain.linearRampToValueAtTime(volume, now + 0.05);      // Slower attack (50ms)
-  masterGain.gain.linearRampToValueAtTime(volume * 0.9, now + 0.2); // Gentle decay
-  masterGain.gain.linearRampToValueAtTime(volume * 0.9, now + duration - 0.3); // Long sustain
-  masterGain.gain.linearRampToValueAtTime(0, now + duration);       // Gentle release
+  masterGain.gain.linearRampToValueAtTime(volume, now + 0.05);      // Attack (50ms)
+  masterGain.gain.linearRampToValueAtTime(volume * 0.9, now + 0.1); // Decay
+  masterGain.gain.linearRampToValueAtTime(volume * 0.9, now + duration - 0.1); // Sustain
+  masterGain.gain.linearRampToValueAtTime(0, now + duration);       // Release
   
-  // Start all oscillators at exactly the same time
+  // Start all oscillators at scheduled time
   oscillators.forEach(oscillator => {
     oscillator.start(now);
     oscillator.stop(now + duration);
   });
+}
+
+function play4MeasureSATB() {
+  const measureDuration = 1.2; // 1.2 seconds per measure
   
-  // Visual feedback
+  // Get all measure data
+  const measures = [];
+  for (let i = 1; i <= 4; i++) {
+    const soprano = parseFloat(document.getElementById(`m${i}_soprano`).value);
+    const alto = parseFloat(document.getElementById(`m${i}_alto`).value);
+    const tenor = parseFloat(document.getElementById(`m${i}_tenor`).value);
+    const bass = parseFloat(document.getElementById(`m${i}_bass`).value);
+    
+    const sopranoNote = document.getElementById(`m${i}_soprano`).options[document.getElementById(`m${i}_soprano`).selectedIndex].text;
+    const altoNote = document.getElementById(`m${i}_alto`).options[document.getElementById(`m${i}_alto`).selectedIndex].text;
+    const tenorNote = document.getElementById(`m${i}_tenor`).options[document.getElementById(`m${i}_tenor`).selectedIndex].text;
+    const bassNote = document.getElementById(`m${i}_bass`).options[document.getElementById(`m${i}_bass`).selectedIndex].text;
+    
+    measures.push({
+      frequencies: [soprano, alto, tenor, bass],
+      notes: [sopranoNote, altoNote, tenorNote, bassNote],
+      measure: i
+    });
+  }
+  
+  // Schedule all measures using Web Audio API timing
+  measures.forEach((measure, index) => {
+    const startTime = index * measureDuration;
+    playSATB(measure.frequencies, measureDuration, startTime);
+  });
+  
+  // Update status for each measure with timing
+  document.getElementById('status').innerHTML = 
+    `🎵 Playing 4-Measure SATB Sequence<br>` +
+    `📊 Total Duration: ${(measureDuration * 4).toFixed(1)} seconds<br>` +
+    '🎼 Watch the progression: C → F → Am → G';
+  
+  // Visual feedback and measure progression display
   document.getElementById('playSATB').style.background = '#7B1FA2';
+  
+  // Update status for each measure as it plays
+  measures.forEach((measure, index) => {
+    setTimeout(() => {
+      document.getElementById('status').innerHTML = 
+        `🎵 Playing Measure ${measure.measure}<br>` +
+        `S: ${measure.notes[0]} | A: ${measure.notes[1]} | T: ${measure.notes[2]} | B: ${measure.notes[3]}<br>` +
+        `Progress: ${index + 1}/4 measures`;
+    }, index * measureDuration * 1000);
+  });
+  
+  // Reset button and final status
   setTimeout(() => {
     document.getElementById('playSATB').style.background = '#9C27B0';
-  }, duration * 1000);
+    document.getElementById('status').innerHTML = 
+      '✅ 4-Measure SATB Sequence Complete<br>' +
+      '🎼 Chord Progression: C Major → F Major → A minor → G Major';
+  }, measureDuration * 4 * 1000);
 }
 </script>

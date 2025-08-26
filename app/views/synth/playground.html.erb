@@ -1,7 +1,9 @@
 <div style="padding: 40px; font-family: system-ui;">
   <h1>🎹 Simple Synthesizer</h1>
   
-  <div style="margin: 20px 0;">
+  <!-- Single Note Section -->
+  <div style="margin: 20px 0; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+    <h2>Single Note</h2>
     <select id="noteSelect" style="padding: 10px; font-size: 18px; margin-right: 20px;">
       <option value="65.41">C2</option>
       <option value="73.42">D2</option>
@@ -41,16 +43,138 @@
     </button>
   </div>
   
+  <!-- Chord Section -->
+  <div style="margin: 20px 0; padding: 20px; background: #e8f4f8; border-radius: 8px;">
+    <h2>Chord (3 Notes)</h2>
+    <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+      <!-- Note 1 -->
+      <div>
+        <label>Note 1:</label>
+        <select id="chord1" style="padding: 10px; font-size: 16px;">
+          <option value="65.41">C2</option>
+          <option value="73.42">D2</option>
+          <option value="82.41">E2</option>
+          <option value="87.31">F2</option>
+          <option value="98.00">G2</option>
+          <option value="110.00">A2</option>
+          <option value="123.47">B2</option>
+          
+          <option value="130.81">C3</option>
+          <option value="146.83">D3</option>
+          <option value="164.81">E3</option>
+          <option value="174.61">F3</option>
+          <option value="196.00">G3</option>
+          <option value="220.00">A3</option>
+          <option value="246.94">B3</option>
+          
+          <option value="261.63" selected>C4</option>
+          <option value="293.66">D4</option>
+          <option value="329.63">E4</option>
+          <option value="349.23">F4</option>
+          <option value="392.00">G4</option>
+          <option value="440.00">A4</option>
+          <option value="493.88">B4</option>
+          
+          <option value="523.25">C5</option>
+          <option value="587.33">D5</option>
+          <option value="659.25">E5</option>
+          <option value="698.46">F5</option>
+          <option value="783.99">G5</option>
+          <option value="880.00">A5</option>
+          <option value="987.77">B5</option>
+        </select>
+      </div>
+      
+      <!-- Note 2 -->
+      <div>
+        <label>Note 2:</label>
+        <select id="chord2" style="padding: 10px; font-size: 16px;">
+          <option value="65.41">C2</option>
+          <option value="73.42">D2</option>
+          <option value="82.41">E2</option>
+          <option value="87.31">F2</option>
+          <option value="98.00">G2</option>
+          <option value="110.00">A2</option>
+          <option value="123.47">B2</option>
+          
+          <option value="130.81">C3</option>
+          <option value="146.83">D3</option>
+          <option value="164.81">E3</option>
+          <option value="174.61">F3</option>
+          <option value="196.00">G3</option>
+          <option value="220.00">A3</option>
+          <option value="246.94">B3</option>
+          
+          <option value="261.63">C4</option>
+          <option value="293.66">D4</option>
+          <option value="329.63" selected>E4</option>
+          <option value="349.23">F4</option>
+          <option value="392.00">G4</option>
+          <option value="440.00">A4</option>
+          <option value="493.88">B4</option>
+          
+          <option value="523.25">C5</option>
+          <option value="587.33">D5</option>
+          <option value="659.25">E5</option>
+          <option value="698.46">F5</option>
+          <option value="783.99">G5</option>
+          <option value="880.00">A5</option>
+          <option value="987.77">B5</option>
+        </select>
+      </div>
+      
+      <!-- Note 3 -->
+      <div>
+        <label>Note 3:</label>
+        <select id="chord3" style="padding: 10px; font-size: 16px;">
+          <option value="65.41">C2</option>
+          <option value="73.42">D2</option>
+          <option value="82.41">E2</option>
+          <option value="87.31">F2</option>
+          <option value="98.00">G2</option>
+          <option value="110.00">A2</option>
+          <option value="123.47">B2</option>
+          
+          <option value="130.81">C3</option>
+          <option value="146.83">D3</option>
+          <option value="164.81">E3</option>
+          <option value="174.61">F3</option>
+          <option value="196.00">G3</option>
+          <option value="220.00">A3</option>
+          <option value="246.94">B3</option>
+          
+          <option value="261.63">C4</option>
+          <option value="293.66">D4</option>
+          <option value="329.63">E4</option>
+          <option value="349.23">F4</option>
+          <option value="392.00" selected>G4</option>
+          <option value="440.00">A4</option>
+          <option value="493.88">B4</option>
+          
+          <option value="523.25">C5</option>
+          <option value="587.33">D5</option>
+          <option value="659.25">E5</option>
+          <option value="698.46">F5</option>
+          <option value="783.99">G5</option>
+          <option value="880.00">A5</option>
+          <option value="987.77">B5</option>
+        </select>
+      </div>
+      
+      <button id="playChord" style="padding: 20px 40px; font-size: 24px; cursor: pointer; background: #2196F3; color: white; border: none; border-radius: 8px;">
+        Play Chord
+      </button>
+    </div>
+  </div>
+</div>
+  
   <div style="margin: 20px 0;">
     <label>Volume: </label>
     <input type="range" id="volume" min="0" max="100" value="30" />
     <span id="volumeValue">30</span>%
   </div>
   
-  <div style="margin-top: 40px; padding: 20px; background: #f0f0f0; border-radius: 8px;">
-    <h3>📊 What's happening:</h3>
-    <p id="status">Click "Play C4" to generate a 261.63 Hz sine wave</p>
-  </div>
+  <p id="status" style="background: #f9f9f9; padding: 20px; border-radius: 8px; display: none;">
 </div>
 
 <script>
@@ -63,10 +187,35 @@ document.getElementById('volume').addEventListener('input', (e) => {
 });
 
 // Initialize on first user interaction
-document.getElementById('playNote').addEventListener('click', () => {
+// Add chord playback
+document.getElementById('playChord').addEventListener('click', () => {
   if (!audioContext) {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
     document.getElementById('status').textContent = '✅ Audio context initialized!';
+  }
+  
+  // Get frequencies from all three dropdowns
+  const freq1 = parseFloat(document.getElementById('chord1').value);
+  const freq2 = parseFloat(document.getElementById('chord2').value);
+  const freq3 = parseFloat(document.getElementById('chord3').value);
+  
+  const note1 = document.getElementById('chord1').options[document.getElementById('chord1').selectedIndex].text;
+  const note2 = document.getElementById('chord2').options[document.getElementById('chord2').selectedIndex].text;
+  const note3 = document.getElementById('chord3').options[document.getElementById('chord3').selectedIndex].text;
+  
+  playChord([freq1, freq2, freq3], 1.0); // Play for 1 second
+  
+  // Update status
+  document.getElementById('status').innerHTML = 
+    `🎵 Playing Chord: ${note1} + ${note2} + ${note3}<br>` +
+    `📊 Frequencies: ${freq1} Hz, ${freq2} Hz, ${freq3} Hz<br>` +
+    '🎛️ Waveform: Sine (3 oscillators)<br>' +
+    '⏱️ Duration: 1.0 seconds';
+});
+
+document.getElementById('playNote').addEventListener('click', () => {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
   }
   
   // Get selected note
@@ -81,6 +230,8 @@ document.getElementById('playNote').addEventListener('click', () => {
     `🎵 Playing ${noteName} (${frequency} Hz)<br>` +
     '🎛️ Waveform: Sine<br>' +
     '⏱️ Duration: 0.5 seconds';
+
+  document.getElementById('status').style.display = 'block';
 });
 
 function playNote(frequency, duration) {
@@ -119,6 +270,64 @@ function playNote(frequency, duration) {
   document.getElementById('playNote').style.background = '#8BC34A';
   setTimeout(() => {
     document.getElementById('playNote').style.background = '#4CAF50';
+  }, duration * 1000);
+}
+
+function playChord(frequencies, duration) {
+  // Array to store all oscillators for this chord
+  const oscillators = [];
+  const gainNodes = [];
+  
+  // Create a master gain node for the entire chord
+  const masterGain = audioContext.createGain();
+  masterGain.connect(audioContext.destination);
+  
+  // Get volume from slider
+  const volume = document.getElementById('volume').value / 100;
+  
+  // Create oscillator for each frequency
+  frequencies.forEach(frequency => {
+    // Create oscillator (sound source)
+    const oscillator = audioContext.createOscillator();
+    
+    // Create individual gain node for this note
+    const gainNode = audioContext.createGain();
+    
+    // Connect: oscillator -> individual gain -> master gain -> speakers
+    oscillator.connect(gainNode);
+    gainNode.connect(masterGain);
+    
+    // Set frequency and waveform
+    oscillator.frequency.value = frequency;
+    oscillator.type = 'sine';
+    
+    // Reduce individual gain to prevent clipping (volume / number of notes)
+    const individualGain = 1.0 / frequencies.length;
+    gainNode.gain.value = individualGain;
+    
+    // Store references
+    oscillators.push(oscillator);
+    gainNodes.push(gainNode);
+  });
+  
+  // Apply ADSR envelope to master gain
+  const now = audioContext.currentTime;
+  masterGain.gain.setValueAtTime(0, now);                           // Start at 0
+  masterGain.gain.linearRampToValueAtTime(volume, now + 0.02);      // Quick attack (20ms)
+  masterGain.gain.linearRampToValueAtTime(volume * 0.8, now + 0.1); // Slight decay
+  masterGain.gain.linearRampToValueAtTime(volume * 0.8, now + duration - 0.1); // Sustain
+  masterGain.gain.linearRampToValueAtTime(0, now + duration);       // Release
+  
+  // Start all oscillators at the same time
+  oscillators.forEach(oscillator => {
+    oscillator.start(now);
+    oscillator.stop(now + duration);
+  });
+  
+  // Visual feedback
+  document.getElementById('playChord').style.background = '#1976D2';
+  setTimeout(() => {
+    document.getElementById('playChord').style.background = '#2196F3';
   }, duration * 1000);
 }
 </script>

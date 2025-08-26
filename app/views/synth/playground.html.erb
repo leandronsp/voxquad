@@ -1,0 +1,124 @@
+<div style="padding: 40px; font-family: system-ui;">
+  <h1>🎹 Simple Synthesizer</h1>
+  
+  <div style="margin: 20px 0;">
+    <select id="noteSelect" style="padding: 10px; font-size: 18px; margin-right: 20px;">
+      <option value="65.41">C2</option>
+      <option value="73.42">D2</option>
+      <option value="82.41">E2</option>
+      <option value="87.31">F2</option>
+      <option value="98.00">G2</option>
+      <option value="110.00">A2</option>
+      <option value="123.47">B2</option>
+      
+      <option value="130.81">C3</option>
+      <option value="146.83">D3</option>
+      <option value="164.81">E3</option>
+      <option value="174.61">F3</option>
+      <option value="196.00">G3</option>
+      <option value="220.00">A3</option>
+      <option value="246.94">B3</option>
+      
+      <option value="261.63" selected>C4</option>
+      <option value="293.66">D4</option>
+      <option value="329.63">E4</option>
+      <option value="349.23">F4</option>
+      <option value="392.00">G4</option>
+      <option value="440.00">A4</option>
+      <option value="493.88">B4</option>
+      
+      <option value="523.25">C5</option>
+      <option value="587.33">D5</option>
+      <option value="659.25">E5</option>
+      <option value="698.46">F5</option>
+      <option value="783.99">G5</option>
+      <option value="880.00">A5</option>
+      <option value="987.77">B5</option>
+    </select>
+    
+    <button id="playNote" style="padding: 20px 40px; font-size: 24px; cursor: pointer; background: #4CAF50; color: white; border: none; border-radius: 8px;">
+      Play Note
+    </button>
+  </div>
+  
+  <div style="margin: 20px 0;">
+    <label>Volume: </label>
+    <input type="range" id="volume" min="0" max="100" value="30" />
+    <span id="volumeValue">30</span>%
+  </div>
+  
+  <div style="margin-top: 40px; padding: 20px; background: #f0f0f0; border-radius: 8px;">
+    <h3>📊 What's happening:</h3>
+    <p id="status">Click "Play C4" to generate a 261.63 Hz sine wave</p>
+  </div>
+</div>
+
+<script>
+// Create Web Audio API context
+let audioContext = null;
+
+// Update volume display
+document.getElementById('volume').addEventListener('input', (e) => {
+  document.getElementById('volumeValue').textContent = e.target.value;
+});
+
+// Initialize on first user interaction
+document.getElementById('playNote').addEventListener('click', () => {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    document.getElementById('status').textContent = '✅ Audio context initialized!';
+  }
+  
+  // Get selected note
+  const noteSelect = document.getElementById('noteSelect');
+  const frequency = parseFloat(noteSelect.value);
+  const noteName = noteSelect.options[noteSelect.selectedIndex].text;
+  
+  playNote(frequency, 0.5);
+  
+  // Update status
+  document.getElementById('status').innerHTML = 
+    `🎵 Playing ${noteName} (${frequency} Hz)<br>` +
+    '🎛️ Waveform: Sine<br>' +
+    '⏱️ Duration: 0.5 seconds';
+});
+
+function playNote(frequency, duration) {
+  // Create oscillator (sound source)
+  const oscillator = audioContext.createOscillator();
+  
+  // Create gain node (volume control)
+  const gainNode = audioContext.createGain();
+  
+  // Connect oscillator -> gain -> speakers
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+  
+  // Set frequency (pitch)
+  oscillator.frequency.value = frequency;
+  
+  // Set oscillator type (sine wave for pure tone)
+  oscillator.type = 'sine';
+  
+  // Set volume from slider
+  const volume = document.getElementById('volume').value / 100;
+  
+  // Apply simple ADSR envelope (Attack, Decay, Sustain, Release)
+  const now = audioContext.currentTime;
+  gainNode.gain.setValueAtTime(0, now);                        // Start at 0
+  gainNode.gain.linearRampToValueAtTime(volume, now + 0.01);   // Quick attack (10ms)
+  gainNode.gain.linearRampToValueAtTime(volume * 0.8, now + 0.1); // Slight decay
+  gainNode.gain.linearRampToValueAtTime(volume * 0.8, now + duration - 0.1); // Sustain
+  gainNode.gain.linearRampToValueAtTime(0, now + duration);    // Release
+  
+  // Start and stop the note
+  oscillator.start(now);
+  oscillator.stop(now + duration);
+  
+  // Visual feedback
+  document.getElementById('playNote').style.background = '#8BC34A';
+  setTimeout(() => {
+    document.getElementById('playNote').style.background = '#4CAF50';
+  }, duration * 1000);
+}
+</script>

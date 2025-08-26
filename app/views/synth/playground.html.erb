@@ -250,7 +250,7 @@ function playSATB(frequencies, duration, startTime = 0, voiceGains = [1, 1, 1, 1
     
     // Set frequency and waveform
     oscillator.frequency.value = frequency;
-    oscillator.type = 'sine';
+    oscillator.type = 'triangle';
     
     // Get individual voice gain from slider
     const voiceGainSlider = document.getElementById(`${voiceNames[index]}Gain`);

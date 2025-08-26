@@ -115,6 +115,28 @@ const CHROMATIC_NOTES = [
   {name: 'G#5/Ab5', midi: 80}, {name: 'A5', midi: 81}, {name: 'A#5/Bb5', midi: 82}, {name: 'B5', midi: 83}
 ];
 
+// Chord tone mapping for common seventh chords (showing relationship to root)
+const CHORD_TONES = {
+  // Major 7th chords
+  'CMaj': { root: 'C', third: 'E', fifth: 'G', seventh: 'B' },
+  'DMaj': { root: 'D', third: 'F#/Gb', fifth: 'A', seventh: 'C#/Db' },
+  'EMaj': { root: 'E', third: 'G#/Ab', fifth: 'B', seventh: 'D#/Eb' },
+  'FMaj': { root: 'F', third: 'A', fifth: 'C', seventh: 'E' },
+  'GMaj': { root: 'G', third: 'B', fifth: 'D', seventh: 'F#/Gb' },
+  'AMaj': { root: 'A', third: 'C#/Db', fifth: 'E', seventh: 'G#/Ab' },
+  'BMaj': { root: 'B', third: 'D#/Eb', fifth: 'F#/Gb', seventh: 'A#/Bb' },
+  
+  // Dominant 7th chords (♭7)
+  'C7': { root: 'C', third: 'E', fifth: 'G', seventh: 'A#/Bb' },
+  'D7': { root: 'D', third: 'F#/Gb', fifth: 'A', seventh: 'C' },
+  'E7': { root: 'E', third: 'G#/Ab', fifth: 'B', seventh: 'D' },
+  'F7': { root: 'F', third: 'A', fifth: 'C', seventh: 'D#/Eb' },
+  'G7': { root: 'G', third: 'B', fifth: 'D', seventh: 'F' },
+  'A7': { root: 'A', third: 'C#/Db', fifth: 'E', seventh: 'G' },
+  'B7': { root: 'B', third: 'D#/Eb', fifth: 'F#/Gb', seventh: 'A' }
+};
+
+
 // Calculate frequency from MIDI note number using equal temperament
 function midiToFrequency(midiNote) {
   return 440 * Math.pow(2, (midiNote - 69) / 12);
@@ -127,7 +149,7 @@ CHROMATIC_NOTES.forEach(note => {
   NOTE_FREQUENCIES[note.name] = frequency;
 });
 
-// Generate note options from chromatic notes
+// Generate note options from chromatic notes  
 const noteOptions = CHROMATIC_NOTES.map(note => ({
   value: midiToFrequency(note.midi).toFixed(2),
   text: note.name
@@ -156,29 +178,31 @@ function getFrequencyByNote(noteName) {
 
 // Initialize all dropdowns when page loads
 document.addEventListener('DOMContentLoaded', () => {
-  // Populate SATB measure dropdowns with chord progression: C → F → G → C
-  // Measure 1 - C Major Chord (C, E, G, C3)
+  // Populate SATB measure dropdowns with matrix:
+  // M1: C4-E4-G3-C3 | M2: F4-C4-A3-F3 | M3: F4-D4-B3-G3 | M4: G4-E4-C4-C3
+  
+  // Measure 1: C4-E4-G3-C3 (C Major)
   populateDropdown('m1_soprano', getFrequencyByNote('C4'));
   populateDropdown('m1_alto', getFrequencyByNote('E4'));
-  populateDropdown('m1_tenor', getFrequencyByNote('G4'));
+  populateDropdown('m1_tenor', getFrequencyByNote('G3'));
   populateDropdown('m1_bass', getFrequencyByNote('C3'));
   
-  // Measure 2 - F Major Chord  
+  // Measure 2: F4-C4-A3-F3 (F Major)
   populateDropdown('m2_soprano', getFrequencyByNote('F4'));
-  populateDropdown('m2_alto', getFrequencyByNote('A4'));
-  populateDropdown('m2_tenor', getFrequencyByNote('C4'));
+  populateDropdown('m2_alto', getFrequencyByNote('C4'));
+  populateDropdown('m2_tenor', getFrequencyByNote('A3'));
   populateDropdown('m2_bass', getFrequencyByNote('F3'));
   
-  // Measure 3 - G Major Chord
-  populateDropdown('m3_soprano', getFrequencyByNote('G4'));
-  populateDropdown('m3_alto', getFrequencyByNote('B4'));
-  populateDropdown('m3_tenor', getFrequencyByNote('D4'));
+  // Measure 3: F4-D4-B3-G3 (G7)
+  populateDropdown('m3_soprano', getFrequencyByNote('F4'));
+  populateDropdown('m3_alto', getFrequencyByNote('D4'));
+  populateDropdown('m3_tenor', getFrequencyByNote('B3'));
   populateDropdown('m3_bass', getFrequencyByNote('G3'));
   
-  // Measure 4 - C Major Chord (return home)
-  populateDropdown('m4_soprano', getFrequencyByNote('C4'));
+  // Measure 4: G4-E4-C4-C3 (C Major)
+  populateDropdown('m4_soprano', getFrequencyByNote('G4'));
   populateDropdown('m4_alto', getFrequencyByNote('E4'));
-  populateDropdown('m4_tenor', getFrequencyByNote('G4'));
+  populateDropdown('m4_tenor', getFrequencyByNote('C4'));
   populateDropdown('m4_bass', getFrequencyByNote('C3'));
 });
 

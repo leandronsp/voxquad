@@ -142,7 +142,7 @@ Each SATB voice has distinct acoustic properties based on human vocal tract rese
 - **Filter Types**: Peaking (formants) + Lowpass (3kHz cutoff)
 - **Real-time Processing**: Zero-latency Web Audio API synthesis
 
-> 📖 **For complete technical details**, see our [Audio Engine Architecture Documentation](docs/voxquad-audio-engine-diagram.md)
+> 📖 **For complete technical details**, see our [Audio Engine Architecture Documentation](docs/voxquad-audio-engine-markdown.md)
 
 ## Development
 

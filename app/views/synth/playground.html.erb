@@ -7,25 +7,21 @@
     <!-- Voice Controls -->
     <div style="margin-bottom: 20px; display: grid; grid-template-columns: 120px 1fr 1fr 1fr 1fr; gap: 15px; align-items: center;">
       <div></div>
-      <div style="text-align: center;">
-        <select id="chord_m1" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd;">
-          <option value="">All Notes</option>
-        </select>
+      <div style="text-align: center; position: relative;">
+        <input type="text" id="chord_m1" placeholder="All Notes" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd; box-sizing: border-box;" autocomplete="off">
+        <div id="chord_m1_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
       </div>
-      <div style="text-align: center;">
-        <select id="chord_m2" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd;">
-          <option value="">All Notes</option>
-        </select>
+      <div style="text-align: center; position: relative;">
+        <input type="text" id="chord_m2" placeholder="All Notes" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd; box-sizing: border-box;" autocomplete="off">
+        <div id="chord_m2_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
       </div>
-      <div style="text-align: center;">
-        <select id="chord_m3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd;">
-          <option value="">All Notes</option>
-        </select>
+      <div style="text-align: center; position: relative;">
+        <input type="text" id="chord_m3" placeholder="All Notes" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd; box-sizing: border-box;" autocomplete="off">
+        <div id="chord_m3_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
       </div>
-      <div style="text-align: center;">
-        <select id="chord_m4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd;">
-          <option value="">All Notes</option>
-        </select>
+      <div style="text-align: center; position: relative;">
+        <input type="text" id="chord_m4" placeholder="All Notes" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd; box-sizing: border-box;" autocomplete="off">
+        <div id="chord_m4_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
       </div>
     </div>
     
@@ -35,10 +31,22 @@
         <strong style="color: #d63384;">Soprano</strong>
         <input type="range" id="sopranoGain" min="0" max="100" value="80" style="width: 50px;" title="Soprano Volume">
       </div>
-      <select id="m1_soprano" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
-      <select id="m2_soprano" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
-      <select id="m3_soprano" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
-      <select id="m4_soprano" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
+      <div style="position: relative;">
+        <input type="text" id="m1_soprano" placeholder="C4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m1_soprano_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="m2_soprano" placeholder="F4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m2_soprano_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="m3_soprano" placeholder="F4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m3_soprano_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="m4_soprano" placeholder="G4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m4_soprano_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
     </div>
     
     <!-- Alto Row -->
@@ -47,10 +55,22 @@
         <strong style="color: #fd7e14;">Alto</strong>
         <input type="range" id="altoGain" min="0" max="100" value="70" style="width: 50px;" title="Alto Volume">
       </div>
-      <select id="m1_alto" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
-      <select id="m2_alto" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
-      <select id="m3_alto" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
-      <select id="m4_alto" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
+      <div style="position: relative;">
+        <input type="text" id="m1_alto" placeholder="E4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m1_alto_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="m2_alto" placeholder="C4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m2_alto_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="m3_alto" placeholder="D4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m3_alto_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="m4_alto" placeholder="E4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m4_alto_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
     </div>
     
     <!-- Tenor Row -->
@@ -59,10 +79,22 @@
         <strong style="color: #198754;">Tenor</strong>
         <input type="range" id="tenorGain" min="0" max="100" value="70" style="width: 50px;" title="Tenor Volume">
       </div>
-      <select id="m1_tenor" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
-      <select id="m2_tenor" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
-      <select id="m3_tenor" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
-      <select id="m4_tenor" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
+      <div style="position: relative;">
+        <input type="text" id="m1_tenor" placeholder="G3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m1_tenor_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="m2_tenor" placeholder="A3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m2_tenor_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="m3_tenor" placeholder="B3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m3_tenor_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="m4_tenor" placeholder="C4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m4_tenor_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
     </div>
     
     <!-- Bass Row -->
@@ -71,10 +103,22 @@
         <strong style="color: #0d6efd;">Bass</strong>
         <input type="range" id="bassGain" min="0" max="100" value="90" style="width: 50px;" title="Bass Volume">
       </div>
-      <select id="m1_bass" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
-      <select id="m2_bass" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
-      <select id="m3_bass" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
-      <select id="m4_bass" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px;"></select>
+      <div style="position: relative;">
+        <input type="text" id="m1_bass" placeholder="C3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m1_bass_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="m2_bass" placeholder="F3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m2_bass_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="m3_bass" placeholder="G3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m3_bass_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
+      <div style="position: relative;">
+        <input type="text" id="m4_bass" placeholder="C3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <div id="m4_bass_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      </div>
     </div>
     
     <!-- Controls -->
@@ -91,6 +135,43 @@
     </div>
   </div>
 </div>
+
+<style>
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 2px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.autocomplete-option {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.autocomplete-option:hover {
+  background: #f0f0f0;
+}
+
+.autocomplete-option.highlighted {
+  background: #007bff;
+  color: white;
+}
+
+.autocomplete-option:last-child {
+  border-bottom: none;
+}
+</style>
 
 <script>
 // Create Web Audio API context
@@ -192,54 +273,120 @@ const noteOptions = CHROMATIC_NOTES.map(note => ({
   text: note.name
 }));
 
-// Function to populate chord dropdown with all available chords (ordered)
-function populateChordDropdown(selectId) {
-  const select = document.getElementById(selectId);
-  select.innerHTML = '<option value="">All Notes</option>'; // Default empty chord
-  
-  // Define chord order starting with C
-  const chordOrder = [
-    'C', 'Dm', 'Em', 'F', 'G', 'Am', 'G7',  // Key of C major progression
-    'D', 'E', 'A', 'B',                      // Other majors
-    'Bm', 'Fm', 'Cm', 'Gm',                 // Other minors  
-    'C7', 'F7', 'D7', 'A7', 'E7', 'B7'      // Other 7ths
-  ];
-  
-  chordOrder.forEach(chordSymbol => {
-    if (CHORD_DEFINITIONS[chordSymbol]) {
-      const chord = CHORD_DEFINITIONS[chordSymbol];
-      const option = document.createElement('option');
-      option.value = chordSymbol;
-      option.textContent = chord.name;
-      select.appendChild(option);
-    }
-  });
-}
+// Global variables for autocomplete
+let currentHighlightedIndex = -1;
+let currentOptions = [];
 
-// Function to populate note dropdown with optional chord filtering
-function populateDropdown(selectId, defaultValue = null, chordFilter = []) {
-  const select = document.getElementById(selectId);
-  select.innerHTML = '';
+// Autocomplete functionality
+function createAutocomplete(inputId, options, onSelect, filterFunction = null) {
+  const input = document.getElementById(inputId);
+  const dropdown = document.getElementById(inputId + '_dropdown');
   
-  // Filter notes based on chord if provided
-  const filteredOptions = chordFilter.length === 0 ? noteOptions : 
-    noteOptions.filter(note => noteInChord(note.text, chordFilter));
+  let currentFilter = filterFunction ? filterFunction() : [];
   
-  filteredOptions.forEach(note => {
-    const option = document.createElement('option');
-    option.value = note.value;
-    option.textContent = note.text;
-    if (note.value === defaultValue) {
-      option.selected = true;
+  function showOptions(query = '') {
+    // Apply filtering if provided
+    let filteredOptions = filterFunction ? 
+      options.filter(opt => filterFunction().length === 0 || filterFunction().some(filter => 
+        opt.searchText ? opt.searchText.toLowerCase().includes(filter.toLowerCase()) : 
+        opt.text.toLowerCase().includes(filter.toLowerCase())
+      )) : options;
+    
+    // Apply search query filter
+    if (query) {
+      filteredOptions = filteredOptions.filter(opt => 
+        opt.text.toLowerCase().includes(query.toLowerCase())
+      );
     }
-    select.appendChild(option);
+    
+    currentOptions = filteredOptions.slice(0, 8); // Limit to 8 options
+    currentHighlightedIndex = -1;
+    
+    if (currentOptions.length === 0) {
+      dropdown.style.display = 'none';
+      return;
+    }
+    
+    dropdown.innerHTML = '';
+    currentOptions.forEach((option, index) => {
+      const div = document.createElement('div');
+      div.className = 'autocomplete-option';
+      div.textContent = option.text;
+      div.addEventListener('click', () => {
+        selectOption(option);
+      });
+      dropdown.appendChild(div);
+    });
+    
+    dropdown.style.display = 'block';
+  }
+  
+  function selectOption(option) {
+    input.value = option.text;
+    dropdown.style.display = 'none';
+    onSelect(option);
+  }
+  
+  function hideDropdown() {
+    setTimeout(() => {
+      dropdown.style.display = 'none';
+    }, 150); // Small delay to allow clicks
+  }
+  
+  // Event listeners
+  input.addEventListener('input', (e) => {
+    showOptions(e.target.value);
   });
   
-  // If no notes match the filter, fallback to first available note
-  if (filteredOptions.length === 0) {
-    console.warn(`No notes found for chord filter:`, chordFilter);
-    populateDropdown(selectId, defaultValue, []); // Fallback to all notes
+  input.addEventListener('focus', () => {
+    showOptions(input.value);
+  });
+  
+  input.addEventListener('blur', hideDropdown);
+  
+  input.addEventListener('keydown', (e) => {
+    if (dropdown.style.display === 'none') return;
+    
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      currentHighlightedIndex = Math.min(currentHighlightedIndex + 1, currentOptions.length - 1);
+      updateHighlight();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      currentHighlightedIndex = Math.max(currentHighlightedIndex - 1, -1);
+      updateHighlight();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (currentHighlightedIndex >= 0) {
+        selectOption(currentOptions[currentHighlightedIndex]);
+      }
+    } else if (e.key === 'Escape') {
+      dropdown.style.display = 'none';
+    }
+  });
+  
+  function updateHighlight() {
+    const options = dropdown.children;
+    for (let i = 0; i < options.length; i++) {
+      options[i].classList.toggle('highlighted', i === currentHighlightedIndex);
+    }
   }
+  
+  return {
+    updateFilter: (newFilterFunction) => {
+      filterFunction = newFilterFunction;
+      if (input === document.activeElement) {
+        showOptions(input.value);
+      }
+    },
+    setValue: (value) => {
+      const option = options.find(opt => opt.value === value || opt.text === value);
+      if (option) {
+        input.value = option.text;
+        onSelect(option);
+      }
+    }
+  };
 }
 
 // Helper function to get frequency by note name
@@ -247,86 +394,99 @@ function getFrequencyByNote(noteName) {
   return NOTE_FREQUENCIES[noteName].toFixed(2);
 }
 
-// Handle chord change for a specific measure
-function handleChordChange(measureNumber) {
-  const chordSelect = document.getElementById(`chord_m${measureNumber}`);
-  const selectedChord = chordSelect.value;
-  const chordNotes = selectedChord ? CHORD_DEFINITIONS[selectedChord].notes : [];
-  
-  // Get current voice selections to try to maintain them if possible
-  const currentSelections = {
-    soprano: document.getElementById(`m${measureNumber}_soprano`).value,
-    alto: document.getElementById(`m${measureNumber}_alto`).value,
-    tenor: document.getElementById(`m${measureNumber}_tenor`).value,
-    bass: document.getElementById(`m${measureNumber}_bass`).value
-  };
-  
-  // Repopulate voice dropdowns with chord filtering
-  const voiceIds = ['soprano', 'alto', 'tenor', 'bass'];
-  voiceIds.forEach(voice => {
-    const selectId = `m${measureNumber}_${voice}`;
-    const currentValue = currentSelections[voice];
-    
-    // Check if current selection is still valid for the new chord
-    if (chordNotes.length === 0) {
-      // No chord filtering - keep current selection
-      populateDropdown(selectId, currentValue, []);
-    } else {
-      // Apply chord filtering
-      populateDropdown(selectId, null, chordNotes);
-      
-      // Try to maintain current selection if it's still valid
-      const select = document.getElementById(selectId);
-      const validOptions = Array.from(select.options).map(opt => opt.value);
-      if (validOptions.includes(currentValue)) {
-        select.value = currentValue;
-      }
-      // If current selection is not valid, it will default to first option
-    }
-  });
-}
+// Prepare chord options for autocomplete
+const chordOptions = [
+  { value: '', text: 'All Notes' },
+  // Key of C major progression first
+  { value: 'C', text: 'C Major' },
+  { value: 'Dm', text: 'D minor' }, 
+  { value: 'Em', text: 'E minor' },
+  { value: 'F', text: 'F Major' },
+  { value: 'G', text: 'G Major' },
+  { value: 'Am', text: 'A minor' },
+  { value: 'G7', text: 'G7' },
+  // Other majors
+  { value: 'D', text: 'D Major' },
+  { value: 'E', text: 'E Major' },
+  { value: 'A', text: 'A Major' },
+  { value: 'B', text: 'B Major' },
+  // Other minors
+  { value: 'Bm', text: 'B minor' },
+  { value: 'Fm', text: 'F minor' },
+  { value: 'Cm', text: 'C minor' },
+  { value: 'Gm', text: 'G minor' },
+  // Other 7ths
+  { value: 'C7', text: 'C7' },
+  { value: 'F7', text: 'F7' },
+  { value: 'D7', text: 'D7' },
+  { value: 'A7', text: 'A7' },
+  { value: 'E7', text: 'E7' },
+  { value: 'B7', text: 'B7' }
+];
+
+// Store autocomplete instances and current chord selections
+const autocompleteInstances = {};
+const currentChords = { 1: '', 2: '', 3: '', 4: '' };
 
 // Initialize all dropdowns when page loads
 document.addEventListener('DOMContentLoaded', () => {
-  // Populate chord dropdowns
+  // Initialize chord autocompletes
   for (let i = 1; i <= 4; i++) {
-    populateChordDropdown(`chord_m${i}`);
-    
-    // Add event listener for chord changes
-    document.getElementById(`chord_m${i}`).addEventListener('change', () => {
-      handleChordChange(i);
+    autocompleteInstances[`chord_m${i}`] = createAutocomplete(
+      `chord_m${i}`,
+      chordOptions,
+      (option) => {
+        currentChords[i] = option.value;
+        // Chord selection is now purely informational - no filtering
+      }
+    );
+  }
+  
+  // Initialize voice autocompletes for all measures and voices (no filtering)
+  const voiceNames = ['soprano', 'alto', 'tenor', 'bass'];
+  for (let measure = 1; measure <= 4; measure++) {
+    voiceNames.forEach(voice => {
+      const inputId = `m${measure}_${voice}`;
+      autocompleteInstances[inputId] = createAutocomplete(
+        inputId,
+        noteOptions,
+        (option) => {
+          // Note selected - no additional action needed
+        }
+        // No filter function - all notes always available
+      );
     });
   }
   
-  // Initialize with barbershop progression and set matching chords
-  // M1: C4-E4-G3-C3 (C Major)
-  document.getElementById('chord_m1').value = 'C';
-  populateDropdown('m1_soprano', getFrequencyByNote('C4'), CHORD_DEFINITIONS.C.notes);
-  populateDropdown('m1_alto', getFrequencyByNote('E4'), CHORD_DEFINITIONS.C.notes);
-  populateDropdown('m1_tenor', getFrequencyByNote('G3'), CHORD_DEFINITIONS.C.notes);
-  populateDropdown('m1_bass', getFrequencyByNote('C3'), CHORD_DEFINITIONS.C.notes);
+  // Set initial values for barbershop progression
+  autocompleteInstances['chord_m1'].setValue('C Major');
+  autocompleteInstances['chord_m2'].setValue('F Major');
+  autocompleteInstances['chord_m3'].setValue('G7');
+  autocompleteInstances['chord_m4'].setValue('C Major');
   
-  // M2: F4-C4-A3-F3 (F Major) 
-  document.getElementById('chord_m2').value = 'F';
-  populateDropdown('m2_soprano', getFrequencyByNote('F4'), CHORD_DEFINITIONS.F.notes);
-  populateDropdown('m2_alto', getFrequencyByNote('C4'), CHORD_DEFINITIONS.F.notes);
-  populateDropdown('m2_tenor', getFrequencyByNote('A3'), CHORD_DEFINITIONS.F.notes);
-  populateDropdown('m2_bass', getFrequencyByNote('F3'), CHORD_DEFINITIONS.F.notes);
+  // Set initial note values
+  autocompleteInstances['m1_soprano'].setValue('C4');
+  autocompleteInstances['m1_alto'].setValue('E4');
+  autocompleteInstances['m1_tenor'].setValue('G3');
+  autocompleteInstances['m1_bass'].setValue('C3');
   
-  // M3: F4-D4-B3-G3 (G7)
-  document.getElementById('chord_m3').value = 'G7';
-  populateDropdown('m3_soprano', getFrequencyByNote('F4'), CHORD_DEFINITIONS.G7.notes);
-  populateDropdown('m3_alto', getFrequencyByNote('D4'), CHORD_DEFINITIONS.G7.notes);
-  populateDropdown('m3_tenor', getFrequencyByNote('B3'), CHORD_DEFINITIONS.G7.notes);
-  populateDropdown('m3_bass', getFrequencyByNote('G3'), CHORD_DEFINITIONS.G7.notes);
+  autocompleteInstances['m2_soprano'].setValue('F4');
+  autocompleteInstances['m2_alto'].setValue('C4');
+  autocompleteInstances['m2_tenor'].setValue('A3');
+  autocompleteInstances['m2_bass'].setValue('F3');
   
-  // M4: G4-E4-C4-C3 (C Major)
-  document.getElementById('chord_m4').value = 'C';
-  populateDropdown('m4_soprano', getFrequencyByNote('G4'), CHORD_DEFINITIONS.C.notes);
-  populateDropdown('m4_alto', getFrequencyByNote('E4'), CHORD_DEFINITIONS.C.notes);
-  populateDropdown('m4_tenor', getFrequencyByNote('C4'), CHORD_DEFINITIONS.C.notes);
-  populateDropdown('m4_bass', getFrequencyByNote('C3'), CHORD_DEFINITIONS.C.notes);
+  autocompleteInstances['m3_soprano'].setValue('F4');
+  autocompleteInstances['m3_alto'].setValue('D4');
+  autocompleteInstances['m3_tenor'].setValue('B3');
+  autocompleteInstances['m3_bass'].setValue('G3');
+  
+  autocompleteInstances['m4_soprano'].setValue('G4');
+  autocompleteInstances['m4_alto'].setValue('E4');
+  autocompleteInstances['m4_tenor'].setValue('C4');
+  autocompleteInstances['m4_bass'].setValue('C3');
 });
+
+// Chord dropdowns are purely informational - no filtering logic needed
 
 // Update master volume display
 document.getElementById('masterVolume').addEventListener('input', (e) => {
@@ -458,18 +618,31 @@ function playSATB(frequencies, duration, startTime = 0, voiceGains = [1, 1, 1, 1
 function play4MeasureSATB() {
   const measureDuration = 1.2; // 1.2 seconds per measure
   
-  // Get all measure data
+  // Get all measure data from input fields
   const measures = [];
   for (let i = 1; i <= 4; i++) {
-    const soprano = parseFloat(document.getElementById(`m${i}_soprano`).value);
-    const alto = parseFloat(document.getElementById(`m${i}_alto`).value);
-    const tenor = parseFloat(document.getElementById(`m${i}_tenor`).value);
-    const bass = parseFloat(document.getElementById(`m${i}_bass`).value);
+    // Convert note names to frequencies
+    const sopranoNote = document.getElementById(`m${i}_soprano`).value;
+    const altoNote = document.getElementById(`m${i}_alto`).value;
+    const tenorNote = document.getElementById(`m${i}_tenor`).value;
+    const bassNote = document.getElementById(`m${i}_bass`).value;
     
-    measures.push({
-      frequencies: [soprano, alto, tenor, bass],
-      measure: i
-    });
+    const soprano = sopranoNote ? NOTE_FREQUENCIES[sopranoNote] || parseFloat(sopranoNote) : 0;
+    const alto = altoNote ? NOTE_FREQUENCIES[altoNote] || parseFloat(altoNote) : 0;
+    const tenor = tenorNote ? NOTE_FREQUENCIES[tenorNote] || parseFloat(tenorNote) : 0;
+    const bass = bassNote ? NOTE_FREQUENCIES[bassNote] || parseFloat(bassNote) : 0;
+    
+    if (soprano && alto && tenor && bass) {
+      measures.push({
+        frequencies: [soprano, alto, tenor, bass],
+        measure: i
+      });
+    }
+  }
+  
+  if (measures.length === 0) {
+    alert('Please select notes for all voices in at least one measure');
+    return;
   }
   
   // Schedule all measures using Web Audio API timing
@@ -486,6 +659,6 @@ function play4MeasureSATB() {
   setTimeout(() => {
     document.getElementById('playSATB').style.background = '#9C27B0';
     document.getElementById('playSATB').textContent = '▶️ Play Composition';
-  }, measureDuration * 4 * 1000);
+  }, measureDuration * measures.length * 1000);
 }
 </script>

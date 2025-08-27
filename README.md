@@ -85,7 +85,7 @@ app/
 
 ## Audio Engine Technical Details
 
-VoxQuad's audio synthesis is built using the Web Audio API and implements several acoustic modeling techniques to create realistic vocal sounds through advanced formant synthesis.
+VoxQuad's audio synthesis is built using the Web Audio API and implements several acoustic modeling techniques to simulate vocal sounds through advanced formant synthesis.
 
 ### Audio Synthesis Chain
 

@@ -2,7 +2,7 @@
 
 A browser-based SATB (Soprano, Alto, Tenor, Bass) voice synthesizer that lets you create four-part vocal harmonies using Web Audio synthesis.
 
-![VoxQuad Screenshot](docs/images/voxquad-screenshot.png)
+![VoxQuad Demo](docs/images/voxquad.gif)
 
 VoxQuad simulates a vocal quartet right in your browser. Using formant synthesis technology, it creates sounds for four different voice types, allowing you to compose and play back harmonic progressions.
 

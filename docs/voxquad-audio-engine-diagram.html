@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VoxQuad Audio Engine Architecture</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+        .subtitle {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .section {
+            margin: 40px 30px;
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        
+        /* Voice Chain Diagram */
+        .voice-chain {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(90deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            overflow-x: auto;
+        }
+        
+        .audio-node {
+            min-width: 140px;
+            padding: 15px;
+            margin: 0 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            border: 2px solid #ecf0f1;
+        }
+        
+        .audio-node.oscillator { border-color: #e74c3c; }
+        .audio-node.filter { border-color: #f39c12; }
+        .audio-node.gain { border-color: #27ae60; }
+        
+        .audio-node h3 {
+            margin: 0 0 8px 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .audio-node p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.3;
+        }
+        
+        .arrow {
+            font-size: 1.5rem;
+            color: #7f8c8d;
+            margin: 0 5px;
+        }
+        
+        /* Voice Types */
+        .voice-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .voice-card {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .voice-card.soprano { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+        .voice-card.alto { background: linear-gradient(135deg, #ffa726, #ff7043); }
+        .voice-card.tenor { background: linear-gradient(135deg, #26c6da, #00acc1); }
+        .voice-card.bass { background: linear-gradient(135deg, #5c6bc0, #3f51b5); }
+        
+        .voice-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .voice-card .scaling {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 5px 0;
+        }
+        
+        .voice-card .description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* ADSR Envelope */
+        .adsr-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .adsr-visual {
+            display: flex;
+            align-items: end;
+            height: 120px;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .adsr-stage {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            position: relative;
+        }
+        
+        .adsr-bar {
+            width: 60%;
+            background: linear-gradient(to top, #3498db, #5dade2);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+        }
+        
+        .attack .adsr-bar { height: 80%; }
+        .decay .adsr-bar { height: 65%; }
+        .sustain .adsr-bar { height: 65%; }
+        .release .adsr-bar { height: 20%; }
+        
+        .adsr-label {
+            position: absolute;
+            bottom: -15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .adsr-time {
+            position: absolute;
+            top: -20px;
+            font-size: 0.7rem;
+            color: #7f8c8d;
+            width: 100%;
+            text-align: center;
+        }
+        
+        /* Formant Details */
+        .formant-details {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+        
+        .formant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .formant-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .formant-item strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        /* Technical specs */
+        .tech-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .spec-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .spec-card h4 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        .spec-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .spec-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .spec-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-list strong {
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 VoxQuad Audio Engine</h1>
+            <p class="subtitle">Web Audio API Formant Synthesis Architecture</p>
+        </div>
+        
+        <div class="section">
+            <h2>🎛️ Audio Synthesis Chain</h2>
+            <p>Each of the four voices (SATB) follows this signal processing chain:</p>
+            
+            <div class="voice-chain">
+                <div class="audio-node oscillator">
+                    <h3>Oscillator</h3>
+                    <p>Sawtooth wave<br>Simulates vocal cords<br>Rich harmonics</p>
+                </div>
+                <div class="arrow">→</div>
+                
+                <div class="audio-node filter">
+                    <h3>Formant F1</h3>
+                    <p>Peaking filter<br>First resonance<br>Q=10, Gain=12dB</p>
+                </div>
+                <div class="arrow">→</div>
+                
+                <div class="audio-node filter">
+                    <h3>Formant F2</h3>
+                    <p>Peaking filter<br>Second resonance<br>Q=15, Gain=8dB</p>
+                </div>
+                <div class="arrow">→</div>
+                
+                <div class="audio-node filter">
+                    <h3>Lowpass</h3>
+                    <p>High-cut filter<br>3kHz cutoff<br>Removes harshness</p>
+                </div>
+                <div class="arrow">→</div>
+                
+                <div class="audio-node gain">
+                    <h3>Gain</h3>
+                    <p>Volume control<br>ADSR envelope<br>Voice mixing</p>
+                </div>
+                <div class="arrow">→</div>
+                
+                <div class="audio-node gain">
+                    <h3>Output</h3>
+                    <p>Master volume<br>To speakers<br>Final mix</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🎤 Voice Type Characteristics</h2>
+            <p>Each voice type uses different formant scaling factors to simulate vocal tract sizes:</p>
+            
+            <div class="voice-types">
+                <div class="voice-card soprano">
+                    <h3>Soprano</h3>
+                    <div class="scaling">Scaling: 1.2x</div>
+                    <div class="description">Smaller vocal tract<br>Brighter, higher formants<br>More resonance</div>
+                </div>
+                
+                <div class="voice-card alto">
+                    <h3>Alto</h3>
+                    <div class="scaling">Scaling: 1.1x</div>
+                    <div class="description">Mid-high vocal tract<br>Warmer mid-range<br>Balanced timbre</div>
+                </div>
+                
+                <div class="voice-card tenor">
+                    <h3>Tenor</h3>
+                    <div class="scaling">Scaling: 1.0x</div>
+                    <div class="description">Reference size<br>Balanced formants<br>Natural resonance</div>
+                </div>
+                
+                <div class="voice-card bass">
+                    <h3>Bass</h3>
+                    <div class="scaling">Scaling: 0.85x</div>
+                    <div class="description">Larger vocal tract<br>Darker, lower formants<br>Deep resonance</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📈 ADSR Envelope</h2>
+            <div class="adsr-container">
+                <p>Each voice uses a carefully crafted envelope to shape the sound over time:</p>
+                
+                <div class="adsr-visual">
+                    <div class="adsr-stage attack">
+                        <div class="adsr-time">50ms</div>
+                        <div class="adsr-bar"></div>
+                        <div class="adsr-label">ATTACK<br>Fade-in</div>
+                    </div>
+                    
+                    <div class="adsr-stage decay">
+                        <div class="adsr-time">50ms</div>
+                        <div class="adsr-bar"></div>
+                        <div class="adsr-label">DECAY<br>To 90%</div>
+                    </div>
+                    
+                    <div class="adsr-stage sustain">
+                        <div class="adsr-time">Note Duration</div>
+                        <div class="adsr-bar"></div>
+                        <div class="adsr-label">SUSTAIN<br>Hold at 90%</div>
+                    </div>
+                    
+                    <div class="adsr-stage release">
+                        <div class="adsr-time">100ms</div>
+                        <div class="adsr-bar"></div>
+                        <div class="adsr-label">RELEASE<br>Fade-out</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🎛️ Formant Synthesis Details</h2>
+            <div class="formant-details">
+                <h3>🎯 What are Formants?</h3>
+                <p>Formants are resonant frequencies of the human vocal tract that give each vowel sound its characteristic timbre. VoxQuad uses the classic "AH" vowel formants as a base for all voices.</p>
+                
+                <div class="formant-grid">
+                    <div class="formant-item">
+                        <strong>First Formant (F1)</strong>
+                        Base: 827 Hz<br>
+                        Controls vowel openness<br>
+                        Peaking filter, Q=10
+                    </div>
+                    
+                    <div class="formant-item">
+                        <strong>Second Formant (F2)</strong>
+                        Base: 1542 Hz<br>
+                        Controls vowel frontness<br>
+                        Peaking filter, Q=15
+                    </div>
+                    
+                    <div class="formant-item">
+                        <strong>Source Signal</strong>
+                        Sawtooth oscillator<br>
+                        Rich in harmonics<br>
+                        Mimics vocal cord vibration
+                    </div>
+                    
+                    <div class="formant-item">
+                        <strong>Voice Scaling</strong>
+                        Adjusts formant frequencies<br>
+                        Simulates vocal tract size<br>
+                        Creates voice type differences
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>⚙️ Technical Specifications</h2>
+            
+            <div class="tech-specs">
+                <div class="spec-card">
+                    <h4>🌐 Web Audio API Components</h4>
+                    <ul class="spec-list">
+                        <li><strong>OscillatorNode:</strong> Fundamental frequency generation</li>
+                        <li><strong>BiquadFilterNode:</strong> Formant resonances (2x peaking)</li>
+                        <li><strong>BiquadFilterNode:</strong> High-frequency removal (lowpass)</li>
+                        <li><strong>GainNode:</strong> Volume control and envelope shaping</li>
+                    </ul>
+                </div>
+                
+                <div class="spec-card">
+                    <h4>🎵 Audio Parameters</h4>
+                    <ul class="spec-list">
+                        <li><strong>Sample Rate:</strong> Browser default (usually 44.1kHz)</li>
+                        <li><strong>Lowpass Cutoff:</strong> 3kHz (removes harshness)</li>
+                        <li><strong>F1 Q Factor:</strong> 10 (narrow resonance)</li>
+                        <li><strong>F2 Q Factor:</strong> 15 (very narrow resonance)</li>
+                    </ul>
+                </div>
+                
+                <div class="spec-card">
+                    <h4>🎛️ Filter Configuration</h4>
+                    <ul class="spec-list">
+                        <li><strong>F1 Gain:</strong> +12dB (prominent resonance)</li>
+                        <li><strong>F2 Gain:</strong> +8dB (secondary resonance)</li>
+                        <li><strong>Lowpass Q:</strong> 1.0 (gentle rolloff)</li>
+                        <li><strong>Voice Separation:</strong> Independent gain nodes</li>
+                    </ul>
+                </div>
+                
+                <div class="spec-card">
+                    <h4>⏱️ Timing & Envelope</h4>
+                    <ul class="spec-list">
+                        <li><strong>Attack Time:</strong> 50ms (quick fade-in)</li>
+                        <li><strong>Decay Time:</strong> 50ms (to 90% volume)</li>
+                        <li><strong>Sustain Level:</strong> 90% (held during note)</li>
+                        <li><strong>Release Time:</strong> 100ms (fade-out)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

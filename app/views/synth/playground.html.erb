@@ -1,177 +1,142 @@
-<div style="padding: 40px; font-family: system-ui; max-width: 1200px; margin: 0 auto;">
-  <h1 style="text-align: center; color: #333;">🎵 VoxQuad SATB Matrix</h1>
+<div class="voxquad-container">
+  <h1 class="voxquad-title">🎵 VoxQuad SATB Matrix</h1>
   
   <!-- SATB Matrix -->
-  <div style="margin: 30px 0; padding: 30px; background: #f8f4ff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+  <div class="satb-matrix">
     
     <!-- Voice Controls -->
-    <div style="margin-bottom: 20px; display: grid; grid-template-columns: 120px 1fr 1fr 1fr 1fr; gap: 15px; align-items: center;">
+    <div class="matrix-grid chord-headers">
       <div></div>
-      <div style="text-align: center; position: relative;">
-        <input type="text" id="chord_m1" placeholder="All Notes" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd; box-sizing: border-box;" autocomplete="off">
-        <div id="chord_m1_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="chord-header">
+        <input type="text" id="chord_m1" placeholder="All Notes" class="chord-input" autocomplete="off">
+        <div id="chord_m1_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="text-align: center; position: relative;">
-        <input type="text" id="chord_m2" placeholder="All Notes" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd; box-sizing: border-box;" autocomplete="off">
-        <div id="chord_m2_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="chord-header">
+        <input type="text" id="chord_m2" placeholder="All Notes" class="chord-input" autocomplete="off">
+        <div id="chord_m2_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="text-align: center; position: relative;">
-        <input type="text" id="chord_m3" placeholder="All Notes" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd; box-sizing: border-box;" autocomplete="off">
-        <div id="chord_m3_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="chord-header">
+        <input type="text" id="chord_m3" placeholder="All Notes" class="chord-input" autocomplete="off">
+        <div id="chord_m3_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="text-align: center; position: relative;">
-        <input type="text" id="chord_m4" placeholder="All Notes" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd; box-sizing: border-box;" autocomplete="off">
-        <div id="chord_m4_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="chord-header">
+        <input type="text" id="chord_m4" placeholder="All Notes" class="chord-input" autocomplete="off">
+        <div id="chord_m4_dropdown" class="autocomplete-dropdown"></div>
       </div>
     </div>
     
     <!-- Soprano Row -->
-    <div style="margin-bottom: 15px; display: grid; grid-template-columns: 120px 1fr 1fr 1fr 1fr; gap: 15px; align-items: center; padding: 10px; background: rgba(255, 192, 203, 0.2); border-radius: 8px;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <strong style="color: #d63384;">Soprano</strong>
-        <input type="range" id="sopranoGain" min="0" max="100" value="80" style="width: 50px;" title="Soprano Volume">
+    <div class="matrix-grid voice-row soprano-row">
+      <div class="voice-label">
+        <strong class="soprano-label">Soprano</strong>
+        <input type="range" id="sopranoGain" min="0" max="100" value="80" class="voice-gain" title="Soprano Volume">
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m1_soprano" placeholder="D5" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m1_soprano_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m1_soprano" placeholder="D5" class="note-input" autocomplete="off">
+        <div id="m1_soprano_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m2_soprano" placeholder="C5" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m2_soprano_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m2_soprano" placeholder="C5" class="note-input" autocomplete="off">
+        <div id="m2_soprano_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m3_soprano" placeholder="C5" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m3_soprano_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m3_soprano" placeholder="C5" class="note-input" autocomplete="off">
+        <div id="m3_soprano_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m4_soprano" placeholder="C5" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m4_soprano_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m4_soprano" placeholder="C5" class="note-input" autocomplete="off">
+        <div id="m4_soprano_dropdown" class="autocomplete-dropdown"></div>
       </div>
     </div>
     
     <!-- Alto Row -->
-    <div style="margin-bottom: 15px; display: grid; grid-template-columns: 120px 1fr 1fr 1fr 1fr; gap: 15px; align-items: center; padding: 10px; background: rgba(255, 193, 7, 0.2); border-radius: 8px;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <strong style="color: #fd7e14;">Alto</strong>
-        <input type="range" id="altoGain" min="0" max="100" value="70" style="width: 50px;" title="Alto Volume">
+    <div class="matrix-grid voice-row alto-row">
+      <div class="voice-label">
+        <strong class="alto-label">Alto</strong>
+        <input type="range" id="altoGain" min="0" max="100" value="70" class="voice-gain" title="Alto Volume">
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m1_alto" placeholder="B3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m1_alto_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m1_alto" placeholder="B3" class="note-input" autocomplete="off">
+        <div id="m1_alto_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m2_alto" placeholder="C4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m2_alto_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m2_alto" placeholder="C4" class="note-input" autocomplete="off">
+        <div id="m2_alto_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m3_alto" placeholder="F4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m3_alto_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m3_alto" placeholder="F4" class="note-input" autocomplete="off">
+        <div id="m3_alto_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m4_alto" placeholder="E4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m4_alto_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m4_alto" placeholder="E4" class="note-input" autocomplete="off">
+        <div id="m4_alto_dropdown" class="autocomplete-dropdown"></div>
       </div>
     </div>
     
     <!-- Tenor Row -->
-    <div style="margin-bottom: 15px; display: grid; grid-template-columns: 120px 1fr 1fr 1fr 1fr; gap: 15px; align-items: center; padding: 10px; background: rgba(25, 135, 84, 0.2); border-radius: 8px;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <strong style="color: #198754;">Tenor</strong>
-        <input type="range" id="tenorGain" min="0" max="100" value="70" style="width: 50px;" title="Tenor Volume">
+    <div class="matrix-grid voice-row tenor-row">
+      <div class="voice-label">
+        <strong class="tenor-label">Tenor</strong>
+        <input type="range" id="tenorGain" min="0" max="100" value="70" class="voice-gain" title="Tenor Volume">
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m1_tenor" placeholder="G3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m1_tenor_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m1_tenor" placeholder="G4" class="note-input" autocomplete="off">
+        <div id="m1_tenor_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m2_tenor" placeholder="A3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m2_tenor_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m2_tenor" placeholder="F4" class="note-input" autocomplete="off">
+        <div id="m2_tenor_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m3_tenor" placeholder="B3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m3_tenor_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m3_tenor" placeholder="G#4/Ab4" class="note-input" autocomplete="off">
+        <div id="m3_tenor_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m4_tenor" placeholder="C4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m4_tenor_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m4_tenor" placeholder="G4" class="note-input" autocomplete="off">
+        <div id="m4_tenor_dropdown" class="autocomplete-dropdown"></div>
       </div>
     </div>
     
     <!-- Bass Row -->
-    <div style="margin-bottom: 20px; display: grid; grid-template-columns: 120px 1fr 1fr 1fr 1fr; gap: 15px; align-items: center; padding: 10px; background: rgba(13, 110, 253, 0.2); border-radius: 8px;">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <strong style="color: #0d6efd;">Bass</strong>
-        <input type="range" id="bassGain" min="0" max="100" value="90" style="width: 50px;" title="Bass Volume">
+    <div class="matrix-grid voice-row bass-row">
+      <div class="voice-label">
+        <strong class="bass-label">Bass</strong>
+        <input type="range" id="bassGain" min="0" max="100" value="90" class="voice-gain" title="Bass Volume">
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m1_bass" placeholder="C3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m1_bass_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m1_bass" placeholder="G2" class="note-input" autocomplete="off">
+        <div id="m1_bass_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m2_bass" placeholder="F3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m2_bass_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m2_bass" placeholder="A2" class="note-input" autocomplete="off">
+        <div id="m2_bass_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m3_bass" placeholder="G3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m3_bass_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m3_bass" placeholder="G#2/Ab2" class="note-input" autocomplete="off">
+        <div id="m3_bass_dropdown" class="autocomplete-dropdown"></div>
       </div>
-      <div style="position: relative;">
-        <input type="text" id="m4_bass" placeholder="C3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
-        <div id="m4_bass_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
+      <div class="note-cell">
+        <input type="text" id="m4_bass" placeholder="C2" class="note-input" autocomplete="off">
+        <div id="m4_bass_dropdown" class="autocomplete-dropdown"></div>
       </div>
     </div>
     
     <!-- Controls -->
-    <div style="text-align: center; border-top: 2px solid rgba(156, 39, 176, 0.3); padding-top: 20px;">
-      <div style="margin-bottom: 15px;">
-        <label style="margin-right: 10px; font-weight: bold;">Master Volume:</label>
-        <input type="range" id="masterVolume" min="0" max="100" value="40" style="width: 150px;">
-        <span id="masterVolumeValue" style="margin-left: 10px;">40%</span>
+    <div class="controls-section">
+      <div class="master-volume">
+        <label class="volume-label">Master Volume:</label>
+        <input type="range" id="masterVolume" min="0" max="100" value="40" class="master-volume-slider">
+        <span id="masterVolumeValue" class="volume-value">40%</span>
       </div>
       
-      <button id="playSATB" style="padding: 15px 50px; font-size: 20px; cursor: pointer; background: #9C27B0; color: white; border: none; border-radius: 8px; box-shadow: 0 4px 8px rgba(156, 39, 176, 0.3);">
+      <button id="playSATB" class="play-button">
         ▶️ Play Composition
       </button>
     </div>
   </div>
 </div>
 
-<style>
-.autocomplete-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: white;
-  border: 2px solid #ddd;
-  border-top: none;
-  border-radius: 0 0 4px 4px;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.autocomplete-option {
-  padding: 8px 12px;
-  cursor: pointer;
-  border-bottom: 1px solid #eee;
-  font-size: 14px;
-}
-
-.autocomplete-option:hover {
-  background: #f0f0f0;
-}
-
-.autocomplete-option.highlighted {
-  background: #007bff;
-  color: white;
-}
-
-.autocomplete-option:last-child {
-  border-bottom: none;
-}
-</style>
+<%= stylesheet_link_tag 'synth' %>
 
 <script>
 // Create Web Audio API context

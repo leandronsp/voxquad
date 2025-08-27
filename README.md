@@ -2,6 +2,8 @@
 
 A browser-based SATB (Soprano, Alto, Tenor, Bass) voice synthesizer that lets you create four-part vocal harmonies using Web Audio synthesis.
 
+**🎵 Try it live:** [https://voxquad.leandronsp.com](https://voxquad.leandronsp.com)
+
 ![VoxQuad Demo](docs/images/voxquad.gif)
 
 VoxQuad simulates a vocal quartet right in your browser. Using formant synthesis technology, it creates sounds for four different voice types, allowing you to compose and play back harmonic progressions.
@@ -17,10 +19,17 @@ VoxQuad simulates a vocal quartet right in your browser. Using formant synthesis
 ## Quick Start
 
 ### Prerequisites
+
+**Local Development:**
 - Ruby 3.4+
 - Rails 8.0+
 
+**Docker Development:**
+- Docker and Docker Compose
+
 ### Installation
+
+#### Option 1: Local Development
 
 1. Clone the repository
 ```bash
@@ -39,6 +48,44 @@ rails server
 ```
 
 4. Open your browser to `http://localhost:3000`
+
+#### Option 2: Docker Development
+
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/voxquad.git
+cd voxquad
+```
+
+2. Install dependencies and start the server
+```bash
+# First time setup - install gems
+docker compose run --rm app bundle install
+
+# Start the application
+docker compose up
+```
+
+3. Open your browser to `http://localhost:3000`
+
+**Note:** If you add new gems to the Gemfile, run `docker compose run --rm app bundle install` again.
+
+#### Option 3: Production Deployment
+
+1. Build the production Docker image
+```bash
+docker build -t leandronsp/voxquad --target release .
+```
+
+2. Push to Docker registry
+```bash
+docker push leandronsp/voxquad
+```
+
+3. Run the production container
+```bash
+docker run -d --rm -p 3000:3000 --name voxquad-app leandronsp/voxquad
+```
 
 ## How to Use
 

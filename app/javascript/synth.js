@@ -1,3 +1,5 @@
+import { midiToFrequency } from 'synth/utils';
+
 // Create Web Audio API context
 let audioContext = null;
 
@@ -78,10 +80,6 @@ function noteInChord(noteName, chordNotes) {
   });
 }
 
-// Calculate frequency from MIDI note number using equal temperament
-function midiToFrequency(midiNote) {
-  return 440 * Math.pow(2, (midiNote - 69) / 12);
-}
 
 // Create note-to-frequency mapping
 const NOTE_FREQUENCIES = {};

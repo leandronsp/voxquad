@@ -83,6 +83,39 @@ app/
     └── synth.css          # Custom styles
 ```
 
+## Audio Engine Technical Details
+
+VoxQuad's audio synthesis is built using the Web Audio API and implements several acoustic modeling techniques to simulate vocal sounds:
+
+### Formant Synthesis
+The heart of VoxQuad's voice simulation uses [formant synthesis](https://en.wikipedia.org/wiki/Formant). Formants are resonant frequencies of the human vocal tract that give each vowel sound its characteristic timbre. Our implementation:
+
+- Uses sawtooth [oscillators](https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode) to simulate vocal cord vibration
+- Applies two peaking filters in series to create formant resonances (F1 and F2)
+- Scales formant frequencies for different voice types (Soprano: 1.2x, Alto: 1.1x, Tenor: 1.0x, Bass: 0.85x)
+
+### Web Audio API Architecture
+The synthesis chain uses native browser [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_API#audio_context) components:
+
+1. **OscillatorNode** - Generates the fundamental frequency
+2. **BiquadFilterNode** - Creates formant resonances (2 peaking filters per voice)
+3. **BiquadFilterNode** - Lowpass filter to remove harsh harmonics
+4. **GainNode** - Individual voice and master volume control
+
+### ADSR Envelope
+Each voice uses an [ADSR envelope](https://en.wikipedia.org/wiki/Envelope_(music)) implemented with [GainNode](https://developer.mozilla.org/en-US/docs/Web/API/GainNode) automation:
+- **Attack**: 50ms fade-in
+- **Decay**: 50ms to 90% of peak
+- **Sustain**: Held at 90% for note duration
+- **Release**: 100ms fade-out
+
+### Voice Characteristics
+Each SATB voice has distinct acoustic properties based on human vocal ranges and formant research:
+- **Soprano**: Brighter formants, higher resonances
+- **Alto**: Warmer mid-range formants
+- **Tenor**: Balanced reference formants
+- **Bass**: Darker, lower formant frequencies
+
 ## Development
 
 The app uses Rails' importmap for JavaScript modules - no webpack or node_modules needed!

@@ -32,19 +32,19 @@
         <input type="range" id="sopranoGain" min="0" max="100" value="80" style="width: 50px;" title="Soprano Volume">
       </div>
       <div style="position: relative;">
-        <input type="text" id="m1_soprano" placeholder="C4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <input type="text" id="m1_soprano" placeholder="D5" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
         <div id="m1_soprano_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
       </div>
       <div style="position: relative;">
-        <input type="text" id="m2_soprano" placeholder="F4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <input type="text" id="m2_soprano" placeholder="C5" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
         <div id="m2_soprano_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
       </div>
       <div style="position: relative;">
-        <input type="text" id="m3_soprano" placeholder="F4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <input type="text" id="m3_soprano" placeholder="C5" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
         <div id="m3_soprano_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
       </div>
       <div style="position: relative;">
-        <input type="text" id="m4_soprano" placeholder="G4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <input type="text" id="m4_soprano" placeholder="C5" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
         <div id="m4_soprano_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
       </div>
     </div>
@@ -56,7 +56,7 @@
         <input type="range" id="altoGain" min="0" max="100" value="70" style="width: 50px;" title="Alto Volume">
       </div>
       <div style="position: relative;">
-        <input type="text" id="m1_alto" placeholder="E4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <input type="text" id="m1_alto" placeholder="B3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
         <div id="m1_alto_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
       </div>
       <div style="position: relative;">
@@ -64,7 +64,7 @@
         <div id="m2_alto_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
       </div>
       <div style="position: relative;">
-        <input type="text" id="m3_alto" placeholder="D4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
+        <input type="text" id="m3_alto" placeholder="F4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; box-sizing: border-box;" autocomplete="off">
         <div id="m3_alto_dropdown" class="autocomplete-dropdown" style="display: none;"></div>
       </div>
       <div style="position: relative;">
@@ -458,32 +458,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // Set initial values for barbershop progression
-  autocompleteInstances['chord_m1'].setValue('C Major');
+  // Set initial values from the image progression
+  autocompleteInstances['chord_m1'].setValue('G Major');
   autocompleteInstances['chord_m2'].setValue('F Major');
-  autocompleteInstances['chord_m3'].setValue('G7');
+  autocompleteInstances['chord_m3'].setValue('F minor');
   autocompleteInstances['chord_m4'].setValue('C Major');
   
-  // Set initial note values
-  autocompleteInstances['m1_soprano'].setValue('C4');
-  autocompleteInstances['m1_alto'].setValue('E4');
-  autocompleteInstances['m1_tenor'].setValue('G3');
-  autocompleteInstances['m1_bass'].setValue('C3');
+  // Set initial note values to match the image
+  autocompleteInstances['m1_soprano'].setValue('D5');
+  autocompleteInstances['m1_alto'].setValue('B3');
+  autocompleteInstances['m1_tenor'].setValue('G4');
+  autocompleteInstances['m1_bass'].setValue('G2');
   
-  autocompleteInstances['m2_soprano'].setValue('F4');
+  autocompleteInstances['m2_soprano'].setValue('C5');
   autocompleteInstances['m2_alto'].setValue('C4');
-  autocompleteInstances['m2_tenor'].setValue('A3');
-  autocompleteInstances['m2_bass'].setValue('F3');
+  autocompleteInstances['m2_tenor'].setValue('F4');
+  autocompleteInstances['m2_bass'].setValue('A2');
   
-  autocompleteInstances['m3_soprano'].setValue('F4');
-  autocompleteInstances['m3_alto'].setValue('D4');
-  autocompleteInstances['m3_tenor'].setValue('B3');
-  autocompleteInstances['m3_bass'].setValue('G3');
+  autocompleteInstances['m3_soprano'].setValue('C5');
+  autocompleteInstances['m3_alto'].setValue('F4');
+  autocompleteInstances['m3_tenor'].setValue('G#4/Ab4');
+  autocompleteInstances['m3_bass'].setValue('G#2/Ab2');
   
-  autocompleteInstances['m4_soprano'].setValue('G4');
+  autocompleteInstances['m4_soprano'].setValue('C5');
   autocompleteInstances['m4_alto'].setValue('E4');
-  autocompleteInstances['m4_tenor'].setValue('C4');
-  autocompleteInstances['m4_bass'].setValue('C3');
+  autocompleteInstances['m4_tenor'].setValue('G4');
+  autocompleteInstances['m4_bass'].setValue('C2');
 });
 
 // Chord dropdowns are purely informational - no filtering logic needed

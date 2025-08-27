@@ -85,36 +85,64 @@ app/
 
 ## Audio Engine Technical Details
 
-VoxQuad's audio synthesis is built using the Web Audio API and implements several acoustic modeling techniques to simulate vocal sounds:
+VoxQuad's audio synthesis is built using the Web Audio API and implements several acoustic modeling techniques to create realistic vocal sounds through advanced formant synthesis.
 
-### Formant Synthesis
-The heart of VoxQuad's voice simulation uses [formant synthesis](https://en.wikipedia.org/wiki/Formant). Formants are resonant frequencies of the human vocal tract that give each vowel sound its characteristic timbre. Our implementation:
+### Audio Synthesis Chain
 
-- Uses sawtooth [oscillators](https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode) to simulate vocal cord vibration
-- Applies two peaking filters in series to create formant resonances (F1 and F2)
-- Scales formant frequencies for different voice types (Soprano: 1.2x, Alto: 1.1x, Tenor: 1.0x, Bass: 0.85x)
+Each SATB voice follows this carefully designed signal processing chain:
 
-### Web Audio API Architecture
+![Audio Synthesis Chain](docs/images/audio-synthesis-chain.png)
+
 The synthesis chain uses native browser [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_API#audio_context) components:
 
-1. **OscillatorNode** - Generates the fundamental frequency
-2. **BiquadFilterNode** - Creates formant resonances (2 peaking filters per voice)
-3. **BiquadFilterNode** - Lowpass filter to remove harsh harmonics
-4. **GainNode** - Individual voice and master volume control
+1. **[OscillatorNode](https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode)** - Generates sawtooth wave (simulates vocal cord vibration)
+2. **[BiquadFilterNode](https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode) (F1)** - First formant resonance (Peaking, Q=10, +12dB gain)
+3. **[BiquadFilterNode](https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode) (F2)** - Second formant resonance (Peaking, Q=15, +8dB gain)
+4. **[BiquadFilterNode](https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode) (Lowpass)** - Removes harsh harmonics above 3kHz
+5. **[GainNode](https://developer.mozilla.org/en-US/docs/Web/API/GainNode)** - Volume control with ADSR envelope
+6. **Master Output** - Final mix to speakers
 
-### ADSR Envelope
-Each voice uses an [ADSR envelope](https://en.wikipedia.org/wiki/Envelope_(music)) implemented with [GainNode](https://developer.mozilla.org/en-US/docs/Web/API/GainNode) automation:
-- **Attack**: 50ms fade-in
-- **Decay**: 50ms to 90% of peak
-- **Sustain**: Held at 90% for note duration
-- **Release**: 100ms fade-out
+### Formant Synthesis Theory
 
-### Voice Characteristics
-Each SATB voice has distinct acoustic properties based on human vocal ranges and formant research:
-- **Soprano**: Brighter formants, higher resonances
-- **Alto**: Warmer mid-range formants
-- **Tenor**: Balanced reference formants
-- **Bass**: Darker, lower formant frequencies
+The heart of VoxQuad's voice simulation uses [formant synthesis](https://en.wikipedia.org/wiki/Formant). Formants are resonant frequencies of the human vocal tract that give each vowel sound its characteristic timbre. Our implementation uses the classic "AH" vowel formants:
+
+- **F1 (First Formant)**: 827 Hz - Controls vowel openness
+- **F2 (Second Formant)**: 1542 Hz - Controls vowel frontness
+- **Voice-specific scaling** simulates different vocal tract sizes
+
+### ADSR Envelope Design
+
+Each voice uses a carefully crafted [ADSR envelope](https://en.wikipedia.org/wiki/Envelope_(music)) to shape the sound naturally over time:
+
+![ADSR Envelope](docs/images/adsr-envelope.png)
+
+**Envelope Parameters:**
+- **Attack**: 50ms fade-in (quick onset)
+- **Decay**: 50ms to 90% of peak (slight softening)
+- **Sustain**: Held at 90% for note duration (stable tone)
+- **Release**: 100ms fade-out (natural decay)
+
+This envelope creates a more musical and less mechanical sound compared to simple on/off switching.
+
+### Voice Characteristics & Formant Scaling
+
+Each SATB voice has distinct acoustic properties based on human vocal tract research:
+
+| Voice | Scaling | Characteristics | Formant Properties |
+|-------|---------|----------------|-------------------|
+| **Soprano** | 1.2x | Smaller vocal tract | Brighter, higher formants, more resonance |
+| **Alto** | 1.1x | Mid-high vocal tract | Warmer mid-range, balanced timbre |
+| **Tenor** | 1.0x | Reference size | Balanced formants, natural resonance |
+| **Bass** | 0.85x | Larger vocal tract | Darker, lower formants, deep resonance |
+
+### Technical Specifications
+
+- **Sample Rate**: Browser default (typically 44.1kHz)
+- **Waveform**: Sawtooth (rich in harmonics like vocal cords)
+- **Filter Types**: Peaking (formants) + Lowpass (3kHz cutoff)
+- **Real-time Processing**: Zero-latency Web Audio API synthesis
+
+> 📖 **For complete technical details**, see our [Audio Engine Architecture Documentation](docs/voxquad-audio-engine-diagram.md)
 
 ## Development
 

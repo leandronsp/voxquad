@@ -221,61 +221,115 @@ document.getElementById('playSATB').addEventListener('click', () => {
 });
 
 
+// Vowel formant frequencies (F1, F2) based on acoustic research
+const VOWEL_FORMANTS = {
+  a: [827, 1542],  // "bat" - open central vowel
+  e: [430, 2336],  // "bet" - mid front vowel  
+  i: [100, 3379],  // "beet" - close front vowel
+  o: [562, 3577],  // "bought" - mid back vowel
+  u: [200, 1500]   // "boot" - close back vowel
+};
+
+// Voice-specific formant frequency scaling
+const VOICE_SCALING = {
+  soprano: 1.2,   // Higher formants
+  alto: 1.1,      // Slightly higher
+  tenor: 1.0,     // Base frequencies  
+  bass: 0.85      // Lower formants
+};
+
+// Create formant synthesizer based on acoustic principles
+function createFormantVoice(frequency, voiceType, vowel = 'a') {
+  // Get formant frequencies for the vowel
+  const baseFormants = VOWEL_FORMANTS[vowel] || VOWEL_FORMANTS.a;
+  const scalingFactor = VOICE_SCALING[voiceType] || 1.0;
+  
+  // Scale formants for voice type
+  const f1 = baseFormants[0] * scalingFactor;
+  const f2 = baseFormants[1] * scalingFactor;
+  
+  // Single sawtooth source (like vocal cords)
+  const source = audioContext.createOscillator();
+  source.frequency.value = frequency;
+  source.type = 'sawtooth';
+  
+  // Create resonant formant filters in SERIES (not parallel!)
+  // This simulates how vocal tract actually works
+  const formant1 = audioContext.createBiquadFilter();
+  formant1.type = 'peaking'; // Use peaking filter for resonance
+  formant1.frequency.value = f1;
+  formant1.Q.value = 10; // High Q for strong resonance
+  formant1.gain.value = 12; // Boost at this frequency
+  
+  const formant2 = audioContext.createBiquadFilter();
+  formant2.type = 'peaking';
+  formant2.frequency.value = f2;
+  formant2.Q.value = 15; // Even higher Q for F2
+  formant2.gain.value = 8; // Less boost than F1
+  
+  // Lowpass to remove harsh high frequencies
+  const lowpass = audioContext.createBiquadFilter();
+  lowpass.type = 'lowpass';
+  lowpass.frequency.value = 3000;
+  lowpass.Q.value = 1;
+  
+  // Output gain control
+  const outputGain = audioContext.createGain();
+  outputGain.gain.value = 0.1; // Much quieter for peaking filters
+  
+  // Connect in series: source -> formant1 -> formant2 -> lowpass -> output
+  source.connect(formant1);
+  formant1.connect(formant2);
+  formant2.connect(lowpass);
+  lowpass.connect(outputGain);
+  
+  return { 
+    oscillator: source,
+    outputNode: outputGain 
+  };
+}
+
 function playSATB(frequencies, duration, startTime = 0, voiceGains = [1, 1, 1, 1]) {
-  // Array to store all oscillators for SATB
-  const oscillators = [];
+  const voices = [];
   const gainNodes = [];
   
-  // Create a master gain node for the entire SATB harmony
+  // Create master gain
   const masterGain = audioContext.createGain();
   masterGain.connect(audioContext.destination);
   
-  // Get master volume
   const masterVolume = document.getElementById('masterVolume').value / 100;
-  
-  // Voice names for gain control
   const voiceNames = ['soprano', 'alto', 'tenor', 'bass'];
   
-  // Create oscillator for each SATB voice
+  // Create formant voice for each SATB part
   frequencies.forEach((frequency, index) => {
-    // Create oscillator (sound source)
-    const oscillator = audioContext.createOscillator();
-    
-    // Create individual gain node for this voice
+    const voice = createFormantVoice(frequency, voiceNames[index], 'a');
     const gainNode = audioContext.createGain();
     
-    // Connect: oscillator -> individual gain -> master gain -> speakers
-    oscillator.connect(gainNode);
+    // Connect voice -> gain -> master
+    voice.outputNode.connect(gainNode);
     gainNode.connect(masterGain);
     
-    // Set frequency and waveform
-    oscillator.frequency.value = frequency;
-    oscillator.type = 'triangle';
-    
-    // Get individual voice gain from slider
+    // Set individual voice gain
     const voiceGainSlider = document.getElementById(`${voiceNames[index]}Gain`);
     const voiceGainValue = voiceGainSlider ? voiceGainSlider.value / 100 : 0.8;
+    gainNode.gain.value = voiceGainValue * 0.4;
     
-    // Set individual voice gain
-    gainNode.gain.value = voiceGainValue * 0.25; // Scale down to prevent clipping
-    
-    // Store references
-    oscillators.push(oscillator);
+    voices.push(voice);
     gainNodes.push(gainNode);
   });
   
-  // Apply ADSR envelope to master gain
+  // Apply ADSR envelope
   const now = audioContext.currentTime + startTime;
-  masterGain.gain.setValueAtTime(0, now);                                    // Start at 0
-  masterGain.gain.linearRampToValueAtTime(masterVolume, now + 0.05);         // Attack (50ms)
-  masterGain.gain.linearRampToValueAtTime(masterVolume * 0.9, now + 0.1);    // Decay
-  masterGain.gain.linearRampToValueAtTime(masterVolume * 0.9, now + duration - 0.1); // Sustain
-  masterGain.gain.linearRampToValueAtTime(0, now + duration);                // Release
+  masterGain.gain.setValueAtTime(0, now);
+  masterGain.gain.linearRampToValueAtTime(masterVolume, now + 0.05);
+  masterGain.gain.linearRampToValueAtTime(masterVolume * 0.9, now + 0.1);
+  masterGain.gain.linearRampToValueAtTime(masterVolume * 0.9, now + duration - 0.1);
+  masterGain.gain.linearRampToValueAtTime(0, now + duration);
   
-  // Start all oscillators at scheduled time
-  oscillators.forEach(oscillator => {
-    oscillator.start(now);
-    oscillator.stop(now + duration);
+  // Start all voices
+  voices.forEach(voice => {
+    voice.oscillator.start(now);
+    voice.oscillator.stop(now + duration);
   });
 }
 

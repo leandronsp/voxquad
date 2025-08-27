@@ -8,16 +8,24 @@
     <div style="margin-bottom: 20px; display: grid; grid-template-columns: 120px 1fr 1fr 1fr 1fr; gap: 15px; align-items: center;">
       <div></div>
       <div style="text-align: center;">
-        <h3 style="margin: 0; color: #666;">Measure 1</h3>
+        <select id="chord_m1" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd;">
+          <option value="">All Notes</option>
+        </select>
       </div>
       <div style="text-align: center;">
-        <h3 style="margin: 0; color: #666;">Measure 2</h3>
+        <select id="chord_m2" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd;">
+          <option value="">All Notes</option>
+        </select>
       </div>
       <div style="text-align: center;">
-        <h3 style="margin: 0; color: #666;">Measure 3</h3>
+        <select id="chord_m3" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd;">
+          <option value="">All Notes</option>
+        </select>
       </div>
       <div style="text-align: center;">
-        <h3 style="margin: 0; color: #666;">Measure 4</h3>
+        <select id="chord_m4" style="padding: 8px; font-size: 16px; width: 100%; border-radius: 4px; font-weight: bold; background: #fff; border: 2px solid #ddd;">
+          <option value="">All Notes</option>
+        </select>
       </div>
     </div>
     
@@ -115,26 +123,55 @@ const CHROMATIC_NOTES = [
   {name: 'G#5/Ab5', midi: 80}, {name: 'A5', midi: 81}, {name: 'A#5/Bb5', midi: 82}, {name: 'B5', midi: 83}
 ];
 
-// Chord tone mapping for common seventh chords (showing relationship to root)
-const CHORD_TONES = {
-  // Major 7th chords
-  'CMaj': { root: 'C', third: 'E', fifth: 'G', seventh: 'B' },
-  'DMaj': { root: 'D', third: 'F#/Gb', fifth: 'A', seventh: 'C#/Db' },
-  'EMaj': { root: 'E', third: 'G#/Ab', fifth: 'B', seventh: 'D#/Eb' },
-  'FMaj': { root: 'F', third: 'A', fifth: 'C', seventh: 'E' },
-  'GMaj': { root: 'G', third: 'B', fifth: 'D', seventh: 'F#/Gb' },
-  'AMaj': { root: 'A', third: 'C#/Db', fifth: 'E', seventh: 'G#/Ab' },
-  'BMaj': { root: 'B', third: 'D#/Eb', fifth: 'F#/Gb', seventh: 'A#/Bb' },
+// Chord definitions with their component notes (all octaves included)
+const CHORD_DEFINITIONS = {
+  // Empty chord - no filtering
+  '': { name: 'All Notes', notes: [] },
   
-  // Dominant 7th chords (♭7)
-  'C7': { root: 'C', third: 'E', fifth: 'G', seventh: 'A#/Bb' },
-  'D7': { root: 'D', third: 'F#/Gb', fifth: 'A', seventh: 'C' },
-  'E7': { root: 'E', third: 'G#/Ab', fifth: 'B', seventh: 'D' },
-  'F7': { root: 'F', third: 'A', fifth: 'C', seventh: 'D#/Eb' },
-  'G7': { root: 'G', third: 'B', fifth: 'D', seventh: 'F' },
-  'A7': { root: 'A', third: 'C#/Db', fifth: 'E', seventh: 'G' },
-  'B7': { root: 'B', third: 'D#/Eb', fifth: 'F#/Gb', seventh: 'A' }
+  // Major chords
+  'C': { name: 'C Major', notes: ['C', 'E', 'G'] },
+  'F': { name: 'F Major', notes: ['F', 'A', 'C'] },
+  'G': { name: 'G Major', notes: ['G', 'B', 'D'] },
+  'D': { name: 'D Major', notes: ['D', 'F#/Gb', 'A'] },
+  'A': { name: 'A Major', notes: ['A', 'C#/Db', 'E'] },
+  'E': { name: 'E Major', notes: ['E', 'G#/Ab', 'B'] },
+  'B': { name: 'B Major', notes: ['B', 'D#/Eb', 'F#/Gb'] },
+  
+  // Minor chords  
+  'Am': { name: 'A minor', notes: ['A', 'C', 'E'] },
+  'Dm': { name: 'D minor', notes: ['D', 'F', 'A'] },
+  'Em': { name: 'E minor', notes: ['E', 'G', 'B'] },
+  'Bm': { name: 'B minor', notes: ['B', 'D', 'F#/Gb'] },
+  'Fm': { name: 'F minor', notes: ['F', 'G#/Ab', 'C'] },
+  'Cm': { name: 'C minor', notes: ['C', 'D#/Eb', 'G'] },
+  'Gm': { name: 'G minor', notes: ['G', 'A#/Bb', 'D'] },
+  
+  // Dominant 7th chords
+  'G7': { name: 'G7', notes: ['G', 'B', 'D', 'F'] },
+  'C7': { name: 'C7', notes: ['C', 'E', 'G', 'A#/Bb'] },
+  'F7': { name: 'F7', notes: ['F', 'A', 'C', 'D#/Eb'] },
+  'D7': { name: 'D7', notes: ['D', 'F#/Gb', 'A', 'C'] },
+  'A7': { name: 'A7', notes: ['A', 'C#/Db', 'E', 'G'] },
+  'E7': { name: 'E7', notes: ['E', 'G#/Ab', 'B', 'D'] },
+  'B7': { name: 'B7', notes: ['B', 'D#/Eb', 'F#/Gb', 'A'] }
 };
+
+// Function to check if a note belongs to a chord (any octave)
+function noteInChord(noteName, chordNotes) {
+  if (chordNotes.length === 0) return true; // Empty chord = all notes allowed
+  
+  // Extract base note name (remove octave number)
+  const baseName = noteName.replace(/[2-5]$/, '');
+  
+  return chordNotes.some(chordNote => {
+    // Handle enharmonic equivalents (e.g., F#/Gb matches both F# and Gb)
+    if (chordNote.includes('/')) {
+      const [sharp, flat] = chordNote.split('/');
+      return baseName === sharp || baseName === flat;
+    }
+    return baseName === chordNote;
+  });
+}
 
 
 // Calculate frequency from MIDI note number using equal temperament
@@ -155,12 +192,32 @@ const noteOptions = CHROMATIC_NOTES.map(note => ({
   text: note.name
 }));
 
-// Function to populate dropdown with options
-function populateDropdown(selectId, defaultValue = null) {
+// Function to populate chord dropdown with all available chords
+function populateChordDropdown(selectId) {
+  const select = document.getElementById(selectId);
+  select.innerHTML = '<option value="">All Notes</option>'; // Default empty chord
+  
+  Object.keys(CHORD_DEFINITIONS).forEach(chordSymbol => {
+    if (chordSymbol !== '') { // Skip empty chord as it's already added
+      const chord = CHORD_DEFINITIONS[chordSymbol];
+      const option = document.createElement('option');
+      option.value = chordSymbol;
+      option.textContent = chord.name;
+      select.appendChild(option);
+    }
+  });
+}
+
+// Function to populate note dropdown with optional chord filtering
+function populateDropdown(selectId, defaultValue = null, chordFilter = []) {
   const select = document.getElementById(selectId);
   select.innerHTML = '';
   
-  noteOptions.forEach(note => {
+  // Filter notes based on chord if provided
+  const filteredOptions = chordFilter.length === 0 ? noteOptions : 
+    noteOptions.filter(note => noteInChord(note.text, chordFilter));
+  
+  filteredOptions.forEach(note => {
     const option = document.createElement('option');
     option.value = note.value;
     option.textContent = note.text;
@@ -169,6 +226,12 @@ function populateDropdown(selectId, defaultValue = null) {
     }
     select.appendChild(option);
   });
+  
+  // If no notes match the filter, fallback to first available note
+  if (filteredOptions.length === 0) {
+    console.warn(`No notes found for chord filter:`, chordFilter);
+    populateDropdown(selectId, defaultValue, []); // Fallback to all notes
+  }
 }
 
 // Helper function to get frequency by note name
@@ -176,34 +239,85 @@ function getFrequencyByNote(noteName) {
   return NOTE_FREQUENCIES[noteName].toFixed(2);
 }
 
+// Handle chord change for a specific measure
+function handleChordChange(measureNumber) {
+  const chordSelect = document.getElementById(`chord_m${measureNumber}`);
+  const selectedChord = chordSelect.value;
+  const chordNotes = selectedChord ? CHORD_DEFINITIONS[selectedChord].notes : [];
+  
+  // Get current voice selections to try to maintain them if possible
+  const currentSelections = {
+    soprano: document.getElementById(`m${measureNumber}_soprano`).value,
+    alto: document.getElementById(`m${measureNumber}_alto`).value,
+    tenor: document.getElementById(`m${measureNumber}_tenor`).value,
+    bass: document.getElementById(`m${measureNumber}_bass`).value
+  };
+  
+  // Repopulate voice dropdowns with chord filtering
+  const voiceIds = ['soprano', 'alto', 'tenor', 'bass'];
+  voiceIds.forEach(voice => {
+    const selectId = `m${measureNumber}_${voice}`;
+    const currentValue = currentSelections[voice];
+    
+    // Check if current selection is still valid for the new chord
+    if (chordNotes.length === 0) {
+      // No chord filtering - keep current selection
+      populateDropdown(selectId, currentValue, []);
+    } else {
+      // Apply chord filtering
+      populateDropdown(selectId, null, chordNotes);
+      
+      // Try to maintain current selection if it's still valid
+      const select = document.getElementById(selectId);
+      const validOptions = Array.from(select.options).map(opt => opt.value);
+      if (validOptions.includes(currentValue)) {
+        select.value = currentValue;
+      }
+      // If current selection is not valid, it will default to first option
+    }
+  });
+}
+
 // Initialize all dropdowns when page loads
 document.addEventListener('DOMContentLoaded', () => {
-  // Populate SATB measure dropdowns with matrix:
-  // M1: C4-E4-G3-C3 | M2: F4-C4-A3-F3 | M3: F4-D4-B3-G3 | M4: G4-E4-C4-C3
+  // Populate chord dropdowns
+  for (let i = 1; i <= 4; i++) {
+    populateChordDropdown(`chord_m${i}`);
+    
+    // Add event listener for chord changes
+    document.getElementById(`chord_m${i}`).addEventListener('change', () => {
+      handleChordChange(i);
+    });
+  }
   
-  // Measure 1: C4-E4-G3-C3 (C Major)
-  populateDropdown('m1_soprano', getFrequencyByNote('C4'));
-  populateDropdown('m1_alto', getFrequencyByNote('E4'));
-  populateDropdown('m1_tenor', getFrequencyByNote('G3'));
-  populateDropdown('m1_bass', getFrequencyByNote('C3'));
+  // Initialize with barbershop progression and set matching chords
+  // M1: C4-E4-G3-C3 (C Major)
+  document.getElementById('chord_m1').value = 'C';
+  populateDropdown('m1_soprano', getFrequencyByNote('C4'), CHORD_DEFINITIONS.C.notes);
+  populateDropdown('m1_alto', getFrequencyByNote('E4'), CHORD_DEFINITIONS.C.notes);
+  populateDropdown('m1_tenor', getFrequencyByNote('G3'), CHORD_DEFINITIONS.C.notes);
+  populateDropdown('m1_bass', getFrequencyByNote('C3'), CHORD_DEFINITIONS.C.notes);
   
-  // Measure 2: F4-C4-A3-F3 (F Major)
-  populateDropdown('m2_soprano', getFrequencyByNote('F4'));
-  populateDropdown('m2_alto', getFrequencyByNote('C4'));
-  populateDropdown('m2_tenor', getFrequencyByNote('A3'));
-  populateDropdown('m2_bass', getFrequencyByNote('F3'));
+  // M2: F4-C4-A3-F3 (F Major) 
+  document.getElementById('chord_m2').value = 'F';
+  populateDropdown('m2_soprano', getFrequencyByNote('F4'), CHORD_DEFINITIONS.F.notes);
+  populateDropdown('m2_alto', getFrequencyByNote('C4'), CHORD_DEFINITIONS.F.notes);
+  populateDropdown('m2_tenor', getFrequencyByNote('A3'), CHORD_DEFINITIONS.F.notes);
+  populateDropdown('m2_bass', getFrequencyByNote('F3'), CHORD_DEFINITIONS.F.notes);
   
-  // Measure 3: F4-D4-B3-G3 (G7)
-  populateDropdown('m3_soprano', getFrequencyByNote('F4'));
-  populateDropdown('m3_alto', getFrequencyByNote('D4'));
-  populateDropdown('m3_tenor', getFrequencyByNote('B3'));
-  populateDropdown('m3_bass', getFrequencyByNote('G3'));
+  // M3: F4-D4-B3-G3 (G7)
+  document.getElementById('chord_m3').value = 'G7';
+  populateDropdown('m3_soprano', getFrequencyByNote('F4'), CHORD_DEFINITIONS.G7.notes);
+  populateDropdown('m3_alto', getFrequencyByNote('D4'), CHORD_DEFINITIONS.G7.notes);
+  populateDropdown('m3_tenor', getFrequencyByNote('B3'), CHORD_DEFINITIONS.G7.notes);
+  populateDropdown('m3_bass', getFrequencyByNote('G3'), CHORD_DEFINITIONS.G7.notes);
   
-  // Measure 4: G4-E4-C4-C3 (C Major)
-  populateDropdown('m4_soprano', getFrequencyByNote('G4'));
-  populateDropdown('m4_alto', getFrequencyByNote('E4'));
-  populateDropdown('m4_tenor', getFrequencyByNote('C4'));
-  populateDropdown('m4_bass', getFrequencyByNote('C3'));
+  // M4: G4-E4-C4-C3 (C Major)
+  document.getElementById('chord_m4').value = 'C';
+  populateDropdown('m4_soprano', getFrequencyByNote('G4'), CHORD_DEFINITIONS.C.notes);
+  populateDropdown('m4_alto', getFrequencyByNote('E4'), CHORD_DEFINITIONS.C.notes);
+  populateDropdown('m4_tenor', getFrequencyByNote('C4'), CHORD_DEFINITIONS.C.notes);
+  populateDropdown('m4_bass', getFrequencyByNote('C3'), CHORD_DEFINITIONS.C.notes);
 });
 
 // Update master volume display

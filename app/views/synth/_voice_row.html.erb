@@ -1,0 +1,23 @@
+<!-- <%= voice.capitalize %> Row -->
+<div class="matrix-grid voice-row <%= voice %>-row">
+  <div class="voice-label">
+    <strong class="<%= voice %>-label"><%= voice.capitalize %></strong>
+    <input type="range" id="<%= voice %>Gain" min="0" max="100" value="<%= gain %>" class="voice-gain" title="<%= voice.capitalize %> Volume">
+  </div>
+  <div class="note-cell">
+    <input type="text" id="m1_<%= voice %>" placeholder="<%= notes[0] %>" class="note-input" autocomplete="off">
+    <div id="m1_<%= voice %>_dropdown" class="autocomplete-dropdown"></div>
+  </div>
+  <div class="note-cell">
+    <input type="text" id="m2_<%= voice %>" placeholder="<%= notes[1] %>" class="note-input" autocomplete="off">
+    <div id="m2_<%= voice %>_dropdown" class="autocomplete-dropdown"></div>
+  </div>
+  <div class="note-cell">
+    <input type="text" id="m3_<%= voice %>" placeholder="<%= notes[2] %>" class="note-input" autocomplete="off">
+    <div id="m3_<%= voice %>_dropdown" class="autocomplete-dropdown"></div>
+  </div>
+  <div class="note-cell">
+    <input type="text" id="m4_<%= voice %>" placeholder="<%= notes[3] %>" class="note-input" autocomplete="off">
+    <div id="m4_<%= voice %>_dropdown" class="autocomplete-dropdown"></div>
+  </div>
+</div>

@@ -4,135 +4,14 @@
   <!-- SATB Matrix -->
   <div class="satb-matrix">
     
-    <!-- Voice Controls -->
-    <div class="matrix-grid chord-headers">
-      <div></div>
-      <div class="chord-header">
-        <input type="text" id="chord_m1" placeholder="All Notes" class="chord-input" autocomplete="off">
-        <div id="chord_m1_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="chord-header">
-        <input type="text" id="chord_m2" placeholder="All Notes" class="chord-input" autocomplete="off">
-        <div id="chord_m2_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="chord-header">
-        <input type="text" id="chord_m3" placeholder="All Notes" class="chord-input" autocomplete="off">
-        <div id="chord_m3_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="chord-header">
-        <input type="text" id="chord_m4" placeholder="All Notes" class="chord-input" autocomplete="off">
-        <div id="chord_m4_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-    </div>
+    <%= render 'chord_headers' %>
+
+    <%= render 'voice_row', voice: 'soprano', gain: 80, notes: ['D5', 'C5', 'C5', 'C5'] %>
+    <%= render 'voice_row', voice: 'alto', gain: 70, notes: ['B3', 'C4', 'F4', 'E4'] %>
+    <%= render 'voice_row', voice: 'tenor', gain: 70, notes: ['G4', 'F4', 'G#4/Ab4', 'G4'] %>
+    <%= render 'voice_row', voice: 'bass', gain: 90, notes: ['G2', 'A2', 'G#2/Ab2', 'C2'] %>
     
-    <!-- Soprano Row -->
-    <div class="matrix-grid voice-row soprano-row">
-      <div class="voice-label">
-        <strong class="soprano-label">Soprano</strong>
-        <input type="range" id="sopranoGain" min="0" max="100" value="80" class="voice-gain" title="Soprano Volume">
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m1_soprano" placeholder="D5" class="note-input" autocomplete="off">
-        <div id="m1_soprano_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m2_soprano" placeholder="C5" class="note-input" autocomplete="off">
-        <div id="m2_soprano_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m3_soprano" placeholder="C5" class="note-input" autocomplete="off">
-        <div id="m3_soprano_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m4_soprano" placeholder="C5" class="note-input" autocomplete="off">
-        <div id="m4_soprano_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-    </div>
-    
-    <!-- Alto Row -->
-    <div class="matrix-grid voice-row alto-row">
-      <div class="voice-label">
-        <strong class="alto-label">Alto</strong>
-        <input type="range" id="altoGain" min="0" max="100" value="70" class="voice-gain" title="Alto Volume">
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m1_alto" placeholder="B3" class="note-input" autocomplete="off">
-        <div id="m1_alto_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m2_alto" placeholder="C4" class="note-input" autocomplete="off">
-        <div id="m2_alto_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m3_alto" placeholder="F4" class="note-input" autocomplete="off">
-        <div id="m3_alto_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m4_alto" placeholder="E4" class="note-input" autocomplete="off">
-        <div id="m4_alto_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-    </div>
-    
-    <!-- Tenor Row -->
-    <div class="matrix-grid voice-row tenor-row">
-      <div class="voice-label">
-        <strong class="tenor-label">Tenor</strong>
-        <input type="range" id="tenorGain" min="0" max="100" value="70" class="voice-gain" title="Tenor Volume">
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m1_tenor" placeholder="G4" class="note-input" autocomplete="off">
-        <div id="m1_tenor_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m2_tenor" placeholder="F4" class="note-input" autocomplete="off">
-        <div id="m2_tenor_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m3_tenor" placeholder="G#4/Ab4" class="note-input" autocomplete="off">
-        <div id="m3_tenor_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m4_tenor" placeholder="G4" class="note-input" autocomplete="off">
-        <div id="m4_tenor_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-    </div>
-    
-    <!-- Bass Row -->
-    <div class="matrix-grid voice-row bass-row">
-      <div class="voice-label">
-        <strong class="bass-label">Bass</strong>
-        <input type="range" id="bassGain" min="0" max="100" value="90" class="voice-gain" title="Bass Volume">
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m1_bass" placeholder="G2" class="note-input" autocomplete="off">
-        <div id="m1_bass_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m2_bass" placeholder="A2" class="note-input" autocomplete="off">
-        <div id="m2_bass_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m3_bass" placeholder="G#2/Ab2" class="note-input" autocomplete="off">
-        <div id="m3_bass_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-      <div class="note-cell">
-        <input type="text" id="m4_bass" placeholder="C2" class="note-input" autocomplete="off">
-        <div id="m4_bass_dropdown" class="autocomplete-dropdown"></div>
-      </div>
-    </div>
-    
-    <!-- Controls -->
-    <div class="controls-section">
-      <div class="master-volume">
-        <label class="volume-label">Master Volume:</label>
-        <input type="range" id="masterVolume" min="0" max="100" value="40" class="master-volume-slider">
-        <span id="masterVolumeValue" class="volume-value">40%</span>
-      </div>
-      
-      <button id="playSATB" class="play-button">
-        ▶️ Play Composition
-      </button>
-    </div>
+    <%= render 'controls' %>
   </div>
 </div>
 

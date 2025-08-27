@@ -200,6 +200,26 @@ To add new features:
 2. Add your code to that module
 3. Import what you need using Rails importmap conventions
 
+### Make Commands
+
+The project includes a `Makefile` with convenient commands:
+
+**Development Commands:**
+```bash
+make app.build      # Build Docker development environment
+make app.bundle     # Install gems via Docker
+make app.run        # Start development server via Docker Compose
+```
+
+**Production Commands:**
+```bash
+make docker.build     # Build production Docker image (AMD64)
+make docker.push      # Push image to Docker registry
+make prod.docker.pull # Pull latest image on production server
+make prod.docker.run  # Deploy and run on production server
+make prod.deploy      # Full deployment (build, push, pull, run)
+```
+
 ## Contributing
 
 Contributions are welcome! Feel free to:
